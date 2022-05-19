@@ -10,5 +10,5 @@ dependencies:
   - pydata-sphinx-theme
 
   - pip:
-    - jupyterlite-xeus-python
+    - jupyterlite-xeus-python==0.2.0
     - jupyterlite-sphinx
