@@ -1,5 +1,11 @@
 # -*- coding: utf-8 -*-
 
+# This should not be there... We should probably
+# do this in jupyterlite-xeus-python instead
+from subprocess import check_call
+check_call(["emsdk", "install", "3.1.2"])
+check_call(["emsdk", "activate", "3.1.2"])
+
 extensions = [
     'jupyterlite_sphinx'
 ]
