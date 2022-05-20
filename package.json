@@ -33,10 +33,11 @@
     "build:dockerimage_no_cache": "docker build -t mydockerimage --no-cache . ",
     "build:emscripten": "echo $(pwd) && docker run --rm -v $(pwd):/src -u $(id -u):$(id -g) mydockerimage copy_output.sh",
     "copy-files": "copyfiles -u 1 src/xpython_wasm.wasm src/xpython_wasm.worker.js src/xpython_wasm.js src/python_data.js src/python_data.data lib",
+    "copy-packagejson": "copyfiles package.json jupyterlite_xeus_python/",
     "build:wasm": "jlpm run build:dockerimage && jlpm run build:emscripten",
     "build:wasm_no_cache": "jlpm run build:dockerimage_no_cache && jlpm run build:emscripten",
-    "build": "jlpm run build:lib && jlpm run copy-files && jlpm run build:labextension:dev",
-    "build:prod": "jlpm run clean && jlpm run build:wasm && jlpm run build:lib && jlpm run copy-files && jlpm run build:labextension",
+    "build": "jlpm run build:lib && jlpm run copy-files && jlpm run copy-packagejson && jlpm run build:labextension:dev",
+    "build:prod": "jlpm run clean && jlpm run build:wasm && jlpm run build:lib && jlpm run copy-files && jlpm run copy-packagejson && jlpm run build:labextension",
     "build:labextension": "jupyter labextension build .",
     "build:labextension:dev": "jupyter labextension build --development True .",
     "build:lib": "tsc",
@@ -82,7 +83,7 @@
   },
   "jupyterlab": {
     "extension": true,
-    "outputDir": "jupyterlite_xeus_python/labextension",
+    "outputDir": "share/jupyter/labextensions/@jupyterlite/xeus-python-kernel",
     "webpackConfig": "./webpack.config.js",
     "sharedPackages": {
       "@jupyterlite/kernel": {
