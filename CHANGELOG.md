@@ -3,7 +3,7 @@
 <!-- <START NEW CHANGELOG ENTRY> -->
 <!-- <END NEW CHANGELOG ENTRY> -->
 
-## Release 0.2.0
+## v0.2.0
 
 ### What's Changed
 * Add docs by @martinRenou in https://github.com/jupyterlite/xeus-python-kernel/pull/4
@@ -16,7 +16,7 @@
 
 **Full Changelog**: https://github.com/jupyterlite/xeus-python-kernel/compare/0.1.0...0.2.0
 
-## Release 0.1.0
+## v0.1.0
 
 ### Contributions
 * Initial version by @DerThorsten in https://github.com/jupyterlite/xeus-python-kernel/commit/d28dbc1ec9c1dca3f861d79ee5930054c00d5998
