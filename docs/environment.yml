@@ -4,6 +4,7 @@ channels:
   - conda-forge
 
 dependencies:
+  - python
   - yarn
   - jupyterlab
   - jupyter-packaging

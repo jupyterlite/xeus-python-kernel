@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+import os
+
+raise RuntimeError(f"prefix {os.environ.get('PREFIX')},conda_prefix {os.environ.get('CONDA_PREFIX')} ")
+
 # This should not be there... We should probably
 # do this in jupyterlite-xeus-python instead
 from subprocess import check_call
