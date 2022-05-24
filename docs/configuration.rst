@@ -9,24 +9,26 @@ xeus-python allows you to pre-install packages in the Python runtime.
 Requirements
 ~~~~~~~~~~~~
 
-This feature requires you to have at least `conda`, `mamba <https://github.com/mamba-org/mamba>`_ or `micromamba` installed.
+This feature requires you to have at least ``conda``, `mamba <https://github.com/mamba-org/mamba>`_ or ``micromamba`` installed.
 
-You also need to install emsdk, this can be done by installing it from `conda-forge`:
+You also need to install ``emsdk``, this can be done by installing it from ``conda-forge``:
 
 .. code::
 
     conda install -c conda-forge emsdk
 
     # OR
+
     mamba install -c conda-forge emsdk
 
     # OR
+
     micromamba install -c conda-forge emsdk
 
 Usage
 ~~~~~
 
-You can pre-install packages by passing the `XeusPythonEnv.packages` CLI option to `jupyter lite build`.
+You can pre-install packages by passing the ``XeusPythonEnv.packages`` CLI option to ``jupyter lite build``.
 
 For example, say you want to install NumPy, Matplotlib and ipyleaflet, it can be done with the following command:
 
