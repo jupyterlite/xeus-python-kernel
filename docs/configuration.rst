@@ -1,8 +1,10 @@
+.. _configuration:
+
 Configuration
 =============
 
-Pre-install packages
---------------------
+Pre-installed packages
+----------------------
 
 xeus-python allows you to pre-install packages in the Python runtime.
 
@@ -29,6 +31,9 @@ Usage
 ~~~~~
 
 You can pre-install packages by passing the ``XeusPythonEnv.packages`` CLI option to ``jupyter lite build``.
+
+.. note::
+    This will automatically install any labextension that it founds, for example installing ipyleaflet will make ipyleaflet work without the need to manually install the jupyter-leaflet labextension.
 
 For example, say you want to install NumPy, Matplotlib and ipyleaflet, it can be done with the following command:
 
