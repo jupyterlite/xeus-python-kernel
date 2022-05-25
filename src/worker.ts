@@ -11,6 +11,19 @@ const ctx: Worker = self as any;
 let raw_xkernel: any;
 let raw_xserver: any;
 
+function sleep(seconds: number) {
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', `/SLEEP?t=${seconds}`, false);
+  try{
+    xhr.send();
+  } catch(e) {
+    console.error(e);
+  }
+}
+
+// sleep(2);
+// sleep(3);
+
 async function waitRunDependency() {
   const promise = new Promise((r: any) => {
     globalThis.Module.monitorRunDependencies = (n: number) => {

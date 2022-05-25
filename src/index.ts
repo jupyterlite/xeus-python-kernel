@@ -45,6 +45,20 @@ const server_kernel: JupyterLiteServerPlugin<void> = {
         });
       }
     });
+
+    navigator.serviceWorker.register('/xeus_python_service.js').then(
+      registration => {
+        // Registration was successful
+        console.log(
+          'ServiceWorker registration successful with scope: ',
+          registration.scope
+        );
+      },
+      err => {
+        // registration failed :(
+        console.log('ServiceWorker registration failed: ', err);
+      }
+    );
   }
 };
 

@@ -17,6 +17,8 @@ from jupyterlite.addons.federated_extensions import FederatedExtensionAddon
 
 PYTHON_VERSION = "3.10"
 
+SERVICE = "xeus_python_service.js"
+
 CHANNELS = [
     "https://repo.mamba.pm/emscripten-forge",
     "https://repo.mamba.pm/conda-forge"
@@ -89,9 +91,14 @@ class XeusPythonEnv(FederatedExtensionAddon):
 
     def pre_build(self, manager):
         """yield a doit task to create the emscripten-32 env and grab anything we need from it"""
+        yield dict(
+            name="setup-service-worker",
+            actions=[(self.copy_one, [Path(__file__).parent / SERVICE, Path(self.manager.output_dir) / SERVICE])],
+        )
+
         # Bail early if there is nothing to do
         if not self.packages:
-            return []
+            return
 
         # Create emscripten env with the given packages
         self.create_env()
