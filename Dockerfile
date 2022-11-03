@@ -5,7 +5,7 @@ ARG PYTHON_VERSION=3.10
 
 RUN micromamba install --yes -c conda-forge \
     git pip python=$PYTHON_VERSION click typer \
-    "emsdk>=3.1.11" "empack>=0.5.3"
+    "empack>=2,<3"
 
 ##################################################################
 # Create emscripten env and pack it
