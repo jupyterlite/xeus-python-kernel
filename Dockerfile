@@ -19,9 +19,11 @@ RUN micromamba create -n xeus-python-kernel \
     --yes \
     python=$PYTHON_VERSION xeus-python
 
-RUN wget https://raw.githubusercontent.com/emscripten-forge/recipes/main/empack_config.yaml
+RUN mkdir -p xeus-python-kernel
 
-RUN mkdir -p xeus-python-kernel && cd xeus-python-kernel && \
+ADD https://raw.githubusercontent.com/emscripten-forge/recipes/main/empack_config.yaml xeus-python-kernel/empack_config.yaml
+
+RUN cd xeus-python-kernel && \
     cp /tmp/xeus-python-kernel/envs/xeus-python-kernel/bin/xpython_wasm.js . && \
     cp /tmp/xeus-python-kernel/envs/xeus-python-kernel/bin/xpython_wasm.wasm . && \
     empack pack env \
