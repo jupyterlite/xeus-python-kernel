@@ -54,7 +54,7 @@ jobs:
             src/python_data.data
             src/python_data.js
             src/web_worker_kernel.ts
-            src/worker.js
+            src/worker.ts
             src/xpython_wasm.js
             src/xpython_wasm.wasm
             src/xpython_wasm.hash
