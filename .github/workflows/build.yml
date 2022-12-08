@@ -57,6 +57,7 @@ jobs:
             src/worker.js
             src/xpython_wasm.js
             src/xpython_wasm.wasm
+            src/xpython_wasm.hash
           key: ${{ hashFiles('Dockerfile') }}
 
       - name: Install dependencies
