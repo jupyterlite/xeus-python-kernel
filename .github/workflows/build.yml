@@ -67,8 +67,6 @@ jobs:
         run: |
           set -eux
           jlpm
-          # build separately for now
-          jlpm run build:wasm
           jlpm run build
           jlpm run eslint:check
           python -m pip install .
@@ -77,8 +75,6 @@ jobs:
 
           # TODO: add JupyterLite browser check
           # python -m jupyterlab.browser_check
-
-          check-manifest -v
 
           pip install build
           python -m build --sdist
