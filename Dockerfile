@@ -22,7 +22,7 @@ RUN micromamba create -n xeus-python-kernel \
 RUN mkdir -p xeus-python-kernel && cd xeus-python-kernel && \
     cp /tmp/xeus-python-kernel/envs/xeus-python-kernel/bin/xpython_wasm.js . && \
     cp /tmp/xeus-python-kernel/envs/xeus-python-kernel/bin/xpython_wasm.wasm . && \
-    empack pack env --env-prefix /tmp/xeus-python-kernel/envs/xeus-python-kernel --outname python_data --config /opt/conda/share/empack/empack_config.yaml
+    empack pack env --split --env-prefix /tmp/xeus-python-kernel/envs/xeus-python-kernel --outname python_data --config /opt/conda/share/empack/empack_config.yaml
 
 COPY copy_output.sh .
 

@@ -12,7 +12,7 @@ import yaml
 
 from traitlets import List, Unicode
 
-from empack.file_packager import pack_environment
+from empack.file_packager import split_pack_environment
 from empack.file_patterns import PkgFileFilter, pkg_file_filter_from_yaml
 
 from jupyterlite.constants import (
@@ -145,9 +145,10 @@ class XeusPythonEnv(FederatedExtensionAddon):
             pkg_file_filter = pkg_file_filter_from_yaml(self.empack_config)
 
         # Pack the environment
-        pack_environment(
+        split_pack_environment(
             env_prefix=self.prefix_path,
             outname=Path(self.cwd.name) / "python_data",
+            pack_outdir=Path(self.cwd.name),
             export_name="globalThis.Module",
             pkg_file_filter=pkg_file_filter,
             download_emsdk="latest",
@@ -160,16 +161,18 @@ class XeusPythonEnv(FederatedExtensionAddon):
         for pkg_json in self.env_extensions(root):
             yield from self.safe_copy_extension(pkg_json)
 
-        # TODO Currently we're shamelessly overwriting the
-        # python_data.{js,data} into the jupyterlite-xeus-python labextension.
-        # We should really find a nicer way.
-        # (make jupyterlite-xeus-python extension somewhat configurable?)
+        # We're shamelessly copying the
+        # *.{js,data} into the jupyterlite-xeus-python labextension.
         dest = self.output_extensions / "@jupyterlite" / "xeus-python-kernel" / "static"
 
-        for file in ["python_data.js", "python_data.data"]:
+        files_to_copy = []
+        files_to_copy.extend(Path(self.cwd.name).glob("*.js"))
+        files_to_copy.extend(Path(self.cwd.name).glob("*.data"))
+
+        for file in files_to_copy:
             yield dict(
-                name=f"xeus:copy:{file}",
-                actions=[(self.copy_one, [Path(self.cwd.name) / file, dest / file])],
+                name=f"xeus:copy:{str(file)}",
+                actions=[(self.copy_one, [Path(self.cwd.name) / file.name, dest / file.name])],
             )
 
         for file in ["xpython_wasm.js", "xpython_wasm.wasm"]:
