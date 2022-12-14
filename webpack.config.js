@@ -6,15 +6,15 @@ module.exports = {
       patterns: [
         {
           from: 'src/*.wasm',
-          to: '.'
+          to: '[name][ext]'
         },
         {
           from: 'src/*.data',
-          to: '.'
+          to: '[name][ext]'
         },
         {
           from: 'src/*.js',
-          to: '.'
+          to: '[name][ext]'
         }
       ]
     })
