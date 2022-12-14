@@ -5,19 +5,15 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: 'src/xpython_wasm.wasm',
+          from: 'src/*.wasm',
           to: '.'
         },
         {
-          from: 'src/xpython_wasm.js',
+          from: 'src/*.data',
           to: '.'
         },
         {
-          from: 'src/python_data.data',
-          to: '.'
-        },
-        {
-          from: 'src/python_data.js',
+          from: 'src/*.js',
           to: '.'
         }
       ]

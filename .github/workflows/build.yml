@@ -51,12 +51,11 @@ jobs:
         uses: actions/cache@v2
         with:
           path: |
-            src/python_data.data
-            src/python_data.js
+            src/*.data
+            src/*.js
+            src/*.wasm
             src/web_worker_kernel.ts
             src/worker.ts
-            src/xpython_wasm.js
-            src/xpython_wasm.wasm
             src/xpython_wasm.hash
           key: ${{ hashFiles('Dockerfile') }}
 

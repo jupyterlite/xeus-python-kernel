@@ -28,4 +28,3 @@ def test_python_env():
 
     # Check empack output
     assert os.path.isfile(Path(addon.cwd.name) / "python_data.js")
-    assert os.path.isfile(Path(addon.cwd.name) / "python_data.data")
