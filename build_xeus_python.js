@@ -25,10 +25,11 @@ if (existsSync(VERSION_FILE_PATH)) {
 }
 
 if (needsRebuild) {
-  execSync('docker build -t jupyterlite-xeus-kernel .');
+  execSync('docker build -t jupyterlite-xeus-kernel .', { stdio: 'inherit' });
 
   execSync(
-    'docker run --rm -v $(pwd):/src -u $(id -u):$(id -g) jupyterlite-xeus-kernel copy_output.sh'
+    'docker run --rm -v $(pwd):/src -u $(id -u):$(id -g) jupyterlite-xeus-kernel copy_output.sh',
+    { stdio: 'inherit' }
   );
 
   writeFileSync(VERSION_FILE_PATH, buildHash);
