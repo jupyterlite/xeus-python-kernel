@@ -5,7 +5,7 @@
 import {
   IServiceWorkerManager,
   JupyterLiteServer,
-  JupyterLiteServerPlugin,
+  JupyterLiteServerPlugin
 } from '@jupyterlite/server';
 import { IBroadcastChannelWrapper } from '@jupyterlite/contents';
 import { IKernel, IKernelSpecs } from '@jupyterlite/kernel';
@@ -38,12 +38,18 @@ const server_kernel: JupyterLiteServerPlugin<void> = {
         }
       },
       create: async (options: IKernel.IOptions): Promise<IKernel> => {
-        const mountDrive = !!(serviceWorker?.enabled && broadcastChannel?.enabled);
+        const mountDrive = !!(
+          serviceWorker?.enabled && broadcastChannel?.enabled
+        );
 
         if (mountDrive) {
-          console.info('xeus-python contents will be synced with Jupyter Contents');
+          console.info(
+            'xeus-python contents will be synced with Jupyter Contents'
+          );
         } else {
-          console.warn('xeus-python contents will NOT be synced with Jupyter Contents');
+          console.warn(
+            'xeus-python contents will NOT be synced with Jupyter Contents'
+          );
         }
 
         return new WebWorkerKernel({
