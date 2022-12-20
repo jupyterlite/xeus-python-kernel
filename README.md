@@ -13,7 +13,7 @@ The [xeus-python](https://github.com/jupyter-xeus/xeus-python) Python kernel for
 
 ## Requirements
 
-- JupyterLite >= 0.1.0b12
+- JupyterLite >= 0.1.0b16
 
 ## Install
 
