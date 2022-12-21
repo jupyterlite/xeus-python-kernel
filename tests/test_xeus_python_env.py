@@ -30,8 +30,8 @@ def test_python_env():
     assert os.path.isfile(Path(addon.cwd.name) / "python_data.js")
     assert os.path.isfile(Path(addon.cwd.name) / "python_data.data")
 
-    os.path.remove(Path(addon.cwd.name) / "python_data.js")
-    os.path.remove(Path(addon.cwd.name) / "python_data.data")
+    os.remove(Path(addon.cwd.name) / "python_data.js")
+    os.remove(Path(addon.cwd.name) / "python_data.data")
 
 
 def test_python_env_from_file_1():
@@ -54,8 +54,8 @@ def test_python_env_from_file_1():
     assert os.path.isfile(Path(addon.cwd.name) / "python_data.js")
     assert os.path.isfile(Path(addon.cwd.name) / "python_data.data")
 
-    os.path.remove(Path(addon.cwd.name) / "python_data.js")
-    os.path.remove(Path(addon.cwd.name) / "python_data.data")
+    os.remove(Path(addon.cwd.name) / "python_data.js")
+    os.remove(Path(addon.cwd.name) / "python_data.data")
 
 
 def test_python_env_from_file_2():
@@ -79,5 +79,5 @@ def test_python_env_from_file_2():
     assert os.path.isfile(Path(addon.cwd.name) / "python_data.js")
     assert os.path.isfile(Path(addon.cwd.name) / "python_data.data")
 
-    os.path.remove(Path(addon.cwd.name) / "python_data.js")
-    os.path.remove(Path(addon.cwd.name) / "python_data.data")
+    os.remove(Path(addon.cwd.name) / "python_data.js")
+    os.remove(Path(addon.cwd.name) / "python_data.data")
