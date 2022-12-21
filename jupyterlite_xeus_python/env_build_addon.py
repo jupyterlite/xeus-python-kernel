@@ -91,6 +91,12 @@ class XeusPythonEnv(FederatedExtensionAddon):
         description="A comma-separated list of packages to install in the xeus-python env",
     )
 
+    environment_file = Unicode(
+        "environment.yml",
+        config=True,
+        description="The path to the environment file. Defaults to \"environment.yml\"",
+    )
+
     @property
     def prefix_path(self):
         """The environment prefix."""
@@ -130,10 +136,10 @@ class XeusPythonEnv(FederatedExtensionAddon):
             bail_early = False
 
         # Process environment.yml file
-        if (Path(self.manager.lite_dir) / "environment.yml").exists():
+        if (Path(self.manager.lite_dir) / self.environment_file).exists():
             bail_early = False
 
-            with open(Path(self.manager.lite_dir) / "environment.yml") as f:
+            with open(Path(self.manager.lite_dir) / self.environment_file) as f:
                 env_data = yaml.safe_load(f)
 
             if env_data.get("name") is not None:
