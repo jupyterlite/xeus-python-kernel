@@ -40,6 +40,7 @@ def test_python_env_from_file_1():
     manager = app.lite_manager
 
     addon = XeusPythonEnv(manager)
+    addon.environment_file = "environment-1.yml"
 
     for step in addon.post_build(manager):
         pass
