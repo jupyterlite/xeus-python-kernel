@@ -48,20 +48,32 @@ except ImportError:
     MAMBA_PYTHON_AVAILABLE = False
 
 try:
-    check_call(["mamba", "--version"], **SILENT)
-    MAMBA_AVAILABLE = True
+    MAMBA_COMMAND = shutil.which("mamba")
+    if MAMBA_COMMAND:
+        check_call([MAMBA_COMMAND, "--version"], **SILENT)
+        MAMBA_AVAILABLE = True
+    else:
+        MAMBA_AVAILABLE = False
 except FileNotFoundError:
     MAMBA_AVAILABLE = False
 
 try:
-    check_call(["micromamba", "--version"], **SILENT)
-    MICROMAMBA_AVAILABLE = True
+    MICROMAMBA_COMMAND = shutil.which("micromamba")
+    if MICROMAMBA_COMMAND:
+        check_call([MICROMAMBA_COMMAND, "--version"], **SILENT)
+        MICROMAMBA_AVAILABLE = True
+    else:
+        MICROMAMBA_AVAILABLE = False
 except FileNotFoundError:
     MICROMAMBA_AVAILABLE = False
 
 try:
-    check_call(["conda", "--version"], **SILENT)
-    CONDA_AVAILABLE = True
+    CONDA_COMMAND = shutil.which("conda")
+    if CONDA_COMMAND:
+        check_call([CONDA_COMMAND, "--version"], **SILENT)
+        CONDA_AVAILABLE = True
+    else:
+        CONDA_AVAILABLE = False
 except FileNotFoundError:
     CONDA_AVAILABLE = False
 
@@ -255,12 +267,12 @@ class XeusPythonEnv(FederatedExtensionAddon):
         if MAMBA_AVAILABLE:
             # Mamba needs the directory to exist already
             self.prefix_path.mkdir(parents=True, exist_ok=True)
-            return self._create_env_with_config("mamba", channels)
+            return self._create_env_with_config(MAMBA_COMMAND, channels)
 
         if MICROMAMBA_AVAILABLE:
             run(
                 [
-                    "micromamba",
+                    MICROMAMBA_COMMAND,
                     "create",
                     "--yes",
                     "--root-prefix",
@@ -277,7 +289,7 @@ class XeusPythonEnv(FederatedExtensionAddon):
             return
 
         if CONDA_AVAILABLE:
-            return self._create_env_with_config("conda", channels)
+            return self._create_env_with_config(CONDA_COMMAND, channels)
 
         raise RuntimeError(
             """Failed to create the virtual environment for xeus-python,
