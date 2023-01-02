@@ -47,36 +47,11 @@ try:
 except ImportError:
     MAMBA_PYTHON_AVAILABLE = False
 
-try:
-    MAMBA_COMMAND = shutil.which("mamba")
-    if MAMBA_COMMAND:
-        check_call([MAMBA_COMMAND, "--version"], **SILENT)
-        MAMBA_AVAILABLE = True
-    else:
-        MAMBA_AVAILABLE = False
-except FileNotFoundError:
-    MAMBA_AVAILABLE = False
+MAMBA_COMMAND = shutil.which("mamba")
 
-try:
-    MICROMAMBA_COMMAND = shutil.which("micromamba")
-    if MICROMAMBA_COMMAND:
-        check_call([MICROMAMBA_COMMAND, "--version"], **SILENT)
-        MICROMAMBA_AVAILABLE = True
-    else:
-        MICROMAMBA_AVAILABLE = False
-except FileNotFoundError:
-    MICROMAMBA_AVAILABLE = False
+MICROMAMBA_COMMAND = shutil.which("micromamba")
 
-try:
-    CONDA_COMMAND = shutil.which("conda")
-    if CONDA_COMMAND:
-        check_call([CONDA_COMMAND, "--version"], **SILENT)
-        CONDA_AVAILABLE = True
-    else:
-        CONDA_AVAILABLE = False
-except FileNotFoundError:
-    CONDA_AVAILABLE = False
-
+CONDA_COMMAND = shutil.which("conda")
 
 class PackagesList(List):
     def from_string(self, s):
@@ -264,12 +239,12 @@ class XeusPythonEnv(FederatedExtensionAddon):
         for channel in self.channels:
             channels.extend(["-c", channel])
 
-        if MAMBA_AVAILABLE:
+        if MAMBA_COMMAND:
             # Mamba needs the directory to exist already
             self.prefix_path.mkdir(parents=True, exist_ok=True)
             return self._create_env_with_config(MAMBA_COMMAND, channels)
 
-        if MICROMAMBA_AVAILABLE:
+        if MICROMAMBA_COMMAND:
             run(
                 [
                     MICROMAMBA_COMMAND,
@@ -288,7 +263,7 @@ class XeusPythonEnv(FederatedExtensionAddon):
             )
             return
 
-        if CONDA_AVAILABLE:
+        if CONDA_COMMAND:
             return self._create_env_with_config(CONDA_COMMAND, channels)
 
         raise RuntimeError(
