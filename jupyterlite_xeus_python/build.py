@@ -6,6 +6,7 @@ import shutil
 from subprocess import check_call, run, DEVNULL
 from typing import List
 from urllib.parse import urlparse
+import sys
 
 import yaml
 
@@ -25,7 +26,9 @@ MAMBA_COMMAND = shutil.which("mamba")
 MICROMAMBA_COMMAND = shutil.which("micromamba")
 CONDA_COMMAND = shutil.which("conda")
 
-PYTHON_VERSION = "3.10"
+PYTHON_MAJOR = 3
+PYTHON_MINOR = 10
+PYTHON_VERSION = f"{PYTHON_MAJOR}.{PYTHON_MINOR}"
 
 XEUS_PYTHON_VERSION = "0.15.9"
 
@@ -119,6 +122,23 @@ def _create_config(prefix_path):
     os.environ["CONDARC"] = str(prefix_path / ".condarc")
 
 
+def _install_pip_dependencies(prefix_path, dependencies):
+    run(
+        [
+            "pip",
+            "install",
+            *dependencies,
+            "--prefix",
+            prefix_path,
+            "--python-version",
+            PYTHON_VERSION,
+            "--no-input",
+            "--verbose",
+        ],
+        check=True,
+    )
+
+
 def build_and_pack_emscripten_env(
     python_version: str = PYTHON_VERSION,
     xeus_python_version: str = XEUS_PYTHON_VERSION,
@@ -146,6 +166,8 @@ def build_and_pack_emscripten_env(
     if packages or xeus_python_version or environment_file:
         bail_early = False
 
+    pip_dependencies = []
+
     # Process environment.yml file
     if environment_file and Path(environment_file).exists():
         bail_early = False
@@ -168,10 +190,7 @@ def build_and_pack_emscripten_env(
                 if isinstance(dependency, str) and dependency not in specs:
                     specs.append(dependency)
                 elif isinstance(dependency, dict) and dependency.get("pip") is not None:
-                    raise RuntimeError(
-                        """Cannot install pip dependencies in the xeus-python Emscripten environment (yet?).
-                        """
-                    )
+                    pip_dependencies = dependency["pip"]
 
     # Bail early if there is nothing to do
     if bail_early and not force:
@@ -191,6 +210,10 @@ def build_and_pack_emscripten_env(
     try:
         # Create emscripten env with the given packages
         create_env(env_name, root_prefix, specs, channels)
+
+        # Install pip dependencies
+        if pip_dependencies:
+            _install_pip_dependencies(prefix_path, pip_dependencies)
 
         pack_kwargs = {}
 

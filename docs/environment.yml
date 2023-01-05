@@ -5,4 +5,6 @@ channels:
 dependencies:
   - numpy
   - matplotlib
-  - ipycanvas
+  - mpmath
+  - pip:
+    - ipycanvas
