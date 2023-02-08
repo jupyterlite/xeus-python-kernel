@@ -94,7 +94,7 @@ class XeusPythonEnv(FederatedExtensionAddon):
         # (make jupyterlite-xeus-python extension somewhat configurable?)
         dest = self.output_extensions / "@jupyterlite" / "xeus-python-kernel" / "static"
         
-
+        # copy *.data/*.js for all side packages
         for item in Path(self.cwd.name) .iterdir():
             if item.suffix == ".data":
 
@@ -114,7 +114,6 @@ class XeusPythonEnv(FederatedExtensionAddon):
 
         for file in [
             "python_data.js",
-            #"python_data.data",
             "xpython_wasm.js",
             "xpython_wasm.wasm",
         ]:
