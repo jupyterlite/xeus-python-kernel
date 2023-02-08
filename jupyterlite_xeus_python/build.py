@@ -58,7 +58,7 @@ def create_env(
     for channel in channels:
         channels_args.extend(["-c", channel])
 
-    if  MAMBA_COMMAND:
+    if MAMBA_COMMAND:
         # Mamba needs the directory to exist already
         prefix_path.mkdir(parents=True, exist_ok=True)
         return _create_env_with_config(MAMBA_COMMAND, prefix_path, specs, channels_args)
