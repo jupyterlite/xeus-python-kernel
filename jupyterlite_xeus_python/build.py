@@ -18,22 +18,16 @@ try:
     from mamba.api import create as mamba_create
 
     MAMBA_PYTHON_AVAILABLE = True
-except ImportError as e:
-    print(f"cannot import mamba because {e}")
+except ImportError:
     MAMBA_PYTHON_AVAILABLE = False
 
 MAMBA_COMMAND = shutil.which("mamba")
 MICROMAMBA_COMMAND = shutil.which("micromamba")
-
 CONDA_COMMAND = shutil.which("conda")
-
-import sys
-print(f"WHICH PY? {shutil.which('python')}  {sys.executable}")
 
 PYTHON_VERSION = "3.10"
 
 CHANNELS = [
-    "/Users/thorstenbeier/micromamba/envs/emf/conda-bld",
     "https://repo.mamba.pm/emscripten-forge",
     "https://repo.mamba.pm/conda-forge",
 ]
@@ -50,7 +44,7 @@ def create_env(
     """Create the emscripten environment with the given specs."""
     prefix_path = Path(root_prefix) / "envs" / env_name
 
-    if True and MAMBA_PYTHON_AVAILABLE:
+    if MAMBA_PYTHON_AVAILABLE:
         mamba_create(
             env_name=env_name,
             base_prefix=root_prefix,
@@ -64,7 +58,7 @@ def create_env(
     for channel in channels:
         channels_args.extend(["-c", channel])
 
-    if True and  MAMBA_COMMAND:
+    if  MAMBA_COMMAND:
         # Mamba needs the directory to exist already
         prefix_path.mkdir(parents=True, exist_ok=True)
         return _create_env_with_config(MAMBA_COMMAND, prefix_path, specs, channels_args)
@@ -226,27 +220,26 @@ def build_and_pack_emscripten_env(
             shutil.copyfile(prefix_path / "bin" / file, Path(output_path) / file)
 
         # Copy worker code and process it
-        print("build_worker",build_worker)
-        if build_worker or True:
-            shutil.copytree(
-                prefix_path / "share" / "xeus-lite",
-                Path(output_path),
-                dirs_exist_ok=True,
-            )
+        #  WHEN WOULD WE NOT WANT TO BUILD THE WORKER?
+        shutil.copytree(
+            prefix_path / "share" / "xeus-lite",
+            Path(output_path),
+            dirs_exist_ok=True,
+        )
 
-            with open(Path(output_path) / "worker.ts", "r") as fobj:
-                worker = fobj.read()
+        with open(Path(output_path) / "worker.ts", "r") as fobj:
+            worker = fobj.read()
 
-            worker = worker.replace("XEUS_KERNEL_FILE", "'xpython_wasm.js'")
-            worker = worker.replace("LANGUAGE_DATA_FILE", "'python_data.js'")
-            worker = worker.replace("importScripts(DATA_FILE);", """
-                importScripts(DATA_FILE);
-                await globalThis.Module.importPackages();
-                await globalThis.Module.init();
-            """ )
-            print(worker)
-            with open(Path(output_path) / "worker.ts", "w") as fobj:
-                fobj.write(worker)
+        worker = worker.replace("XEUS_KERNEL_FILE", "'xpython_wasm.js'")
+        worker = worker.replace("LANGUAGE_DATA_FILE", "'python_data.js'")
+        worker = worker.replace("importScripts(DATA_FILE);", """
+            importScripts(DATA_FILE);
+            await globalThis.Module.importPackages();
+            await globalThis.Module.init();
+        """ )
+        with open(Path(output_path) / "worker.ts", "w") as fobj:
+            fobj.write(worker)
+
     except Exception as e:
         raise e
     finally:
