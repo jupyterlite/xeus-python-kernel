@@ -220,25 +220,25 @@ def build_and_pack_emscripten_env(
             shutil.copyfile(prefix_path / "bin" / file, Path(output_path) / file)
 
         # Copy worker code and process it
-        #  WHEN WOULD WE NOT WANT TO BUILD THE WORKER?
-        shutil.copytree(
-            prefix_path / "share" / "xeus-lite",
-            Path(output_path),
-            dirs_exist_ok=True,
-        )
+        if build_worker:
+            shutil.copytree(
+                prefix_path / "share" / "xeus-lite",
+                Path(output_path),
+                dirs_exist_ok=True,
+            )
 
-        with open(Path(output_path) / "worker.ts", "r") as fobj:
-            worker = fobj.read()
+            with open(Path(output_path) / "worker.ts", "r") as fobj:
+                worker = fobj.read()
 
-        worker = worker.replace("XEUS_KERNEL_FILE", "'xpython_wasm.js'")
-        worker = worker.replace("LANGUAGE_DATA_FILE", "'python_data.js'")
-        worker = worker.replace("importScripts(DATA_FILE);", """
-            importScripts(DATA_FILE);
-            await globalThis.Module.importPackages();
-            await globalThis.Module.init();
-        """ )
-        with open(Path(output_path) / "worker.ts", "w") as fobj:
-            fobj.write(worker)
+            worker = worker.replace("XEUS_KERNEL_FILE", "'xpython_wasm.js'")
+            worker = worker.replace("LANGUAGE_DATA_FILE", "'python_data.js'")
+            worker = worker.replace("importScripts(DATA_FILE);", """
+                importScripts(DATA_FILE);
+                await globalThis.Module.importPackages();
+                await globalThis.Module.init();
+            """ )
+            with open(Path(output_path) / "worker.ts", "w") as fobj:
+                fobj.write(worker)
 
     except Exception as e:
         raise e
