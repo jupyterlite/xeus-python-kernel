@@ -61,7 +61,7 @@ setup_args = dict(
         "traitlets",
         "jupyterlite",
         "requests",
-        "empack>=2.0.7,<3",
+        "empack>=2.0.8,<3",
         "typer",
     ],
     zip_safe=False,
