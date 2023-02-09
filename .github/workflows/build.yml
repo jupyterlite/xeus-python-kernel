@@ -89,10 +89,12 @@ jobs:
       - name: Setup conda
         uses: conda-incubator/setup-miniconda@v2
         with:
-          environment-name: xeus-python-kernel
+          activate-environment: xeus-python-kernel
           environment-file: environment.yml
           python-version: '3.10'
-          mamba-version: '*'
+
+      - name: Install mamba
+        run: conda install -c conda-forge mamba
 
       - name: Make sure the Mamba Python API is available
         run: |
@@ -124,7 +126,9 @@ jobs:
           activate-environment: xeus-python-kernel
           environment-file: environment.yml
           python-version: '3.10'
-          mamba-version: '*'
+
+      - name: Install mamba
+        run: conda install -c conda-forge mamba
 
       - name: Install
         run: pip install jupyterlite-xeus-python.tar.gz
