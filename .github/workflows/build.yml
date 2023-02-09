@@ -60,9 +60,6 @@ jobs:
 
           jupyter labextension list 2>&1 | grep -ie "@jupyterlite/xeus-python-kernel.*OK"
 
-          # TODO: add JupyterLite browser check
-          # python -m jupyterlab.browser_check
-
       - name: Build the extension
         run: |
           pip install build
