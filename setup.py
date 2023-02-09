@@ -20,7 +20,6 @@ lab_path = (
 ensured_targets = [
     str(lab_path / "package.json"),
     str(lab_path / "static" / "python_data.js"),
-    str(lab_path / "static" / "python_data.data"),
     str(lab_path / "static" / "xpython_wasm.js"),
     str(lab_path / "static" / "xpython_wasm.wasm"),
     str(lab_path / "static" / "style.js"),
