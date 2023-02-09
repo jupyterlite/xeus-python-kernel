@@ -19,6 +19,7 @@ jobs:
 
       - name: Install Conda environment with Micromamba
         uses: mamba-org/provision-with-micromamba@main
+        with:
           environment-name: xeus-python-kernel
           environment-file: environment.yml
 
