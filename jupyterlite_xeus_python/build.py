@@ -212,7 +212,7 @@ def build_and_pack_emscripten_env(
             pack_outdir=output_path,
             export_name="globalThis.Module",
             with_export_default_statement=False,
-            #**pack_kwargs,
+            **pack_kwargs,
         )
 
         # Copy xeus-python output
