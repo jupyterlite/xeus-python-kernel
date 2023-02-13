@@ -11,8 +11,8 @@ dependencies:
   - pydata-sphinx-theme
   - yarn
   - jupyterlab
-  - empack >=2.0.8,<3
   - pip:
+    - git+https://github.com/martinRenou/empack.git@synchronous_imports_packages
     - jupyterlite==0.1.0b17
     - jupyterlite-sphinx
     - ..

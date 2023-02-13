@@ -237,6 +237,7 @@ def build_and_pack_emscripten_env(
                 await globalThis.Module.importPackages();
                 await globalThis.Module.init();
             """ )
+            worker = worker.replace("this._raw_xkernel.start();", "console.log('waiting for kernel start');this._raw_xkernel.start();console.log('waited for kernel start');")
             with open(Path(output_path) / "worker.ts", "w") as fobj:
                 fobj.write(worker)
 
