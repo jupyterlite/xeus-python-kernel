@@ -59,7 +59,7 @@ setup_args = dict(
     packages=setuptools.find_packages(exclude=["tests"]),
     install_requires=[
         "traitlets",
-        "jupyterlite-core @ https://jupyterlite--994.org.readthedocs.build/en/994/_static/jupyterlite_core-0.1.0b18-py3-none-any.whl",
+        "jupyterlite-core>=0.1.0b19",
         "requests",
         "empack>=2.0.9,<3",
         "typer",
