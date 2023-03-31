@@ -25,7 +25,7 @@ MAMBA_COMMAND = shutil.which("mamba")
 MICROMAMBA_COMMAND = shutil.which("micromamba")
 CONDA_COMMAND = shutil.which("conda")
 
-PYTHON_VERSION = "3.10"
+PYTHON_VERSION = "3.11"
 
 CHANNELS = [
     "https://repo.mamba.pm/emscripten-forge",
