@@ -1,6 +1,6 @@
 # xeus-python in JupyterLite 🚀🪐
 
-The [xeus-python](https://github.com/jupyter-xeus/xeus-python) kernel compiled to wasm and installable in JupyterLite!!
+The [xeus-python](https://github.com/jupyter-xeus/xeus-python) kernel compiled to WebAssembly and installable in JupyterLite!
 
 Features:
 
@@ -10,7 +10,7 @@ Features:
 - interactive widgets (ipywidgets, ipyleaflet, bqplot, ipycanvas `etc`)
 - JupyterLite custom file-system mounting
 
-How does it compare with JupyterLite's `Pyolite`?
+How does it compare to the [Pyodide kernel](https://github.com/jupyterlite/pyodide-kernel) for JupyterLite?
 
 - `from time import sleep` works!
 - starts faster!
