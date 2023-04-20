@@ -54,3 +54,34 @@ Then those packages are usable directly:
    plt.plot(np.sin(np.linspace(0, 20, 100)))
    plt.show();
 ```
+
+## Advanced Configuration
+
+```{warning}
+This section is mostly for reference and should not be needed for regular use of the `jupyterlite-xeus-python` kernel.
+```
+
+### Provide a custom `empack_config.yaml`
+
+The xeus-python kernel supports passing a custom `empack_config.yaml`. This file can be used to override the default filter rules set by the underlying `empack` tool used for packing the environment.
+
+The set of default rules is available here: https://github.com/emscripten-forge/empack/blob/main/config/empack_config.yaml
+
+If you would like to provide additional rules for including or excluding files in the packed environment, create a `empack_config.yaml` with the following content as an example:
+
+```yaml
+packages:
+  xarray:
+    include_patterns:
+      - pattern: '**/*.py'
+      - pattern: '**/static/css/*.css'
+      - pattern: '**/static/html/*.html'
+```
+
+This example defines a set of custom rules for the `xarray` package package to make sure it includes static files so they are available from the kernel.
+
+```{note}
+The xeus-python kernel automatically handles the filtering of files using the default configuration mentioned above.
+
+Filtering files can help reduce the size of the assets to download.
+```
