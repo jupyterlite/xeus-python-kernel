@@ -80,6 +80,12 @@ packages:
 
 This example defines a set of custom rules for the `xarray` package package to make sure it includes static files so they are available from the kernel.
 
+You can use this file when building JupyterLite:
+
+```shell
+jupyter lite build --XeusPythonEnv.empack_config=empack_config.yaml
+```
+
 ```{note}
 The xeus-python kernel automatically handles the filtering of files using the default configuration mentioned above.
 
