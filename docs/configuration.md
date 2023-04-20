@@ -78,7 +78,7 @@ packages:
       - pattern: '**/static/html/*.html'
 ```
 
-This example defines a set of custom rules for the `xarray` package package to make sure it includes static files so they are available from the kernel.
+This example defines a set of custom rules for the `xarray` package to make sure it includes some static files that should be available from the kernel.
 
 You can use this file when building JupyterLite:
 
@@ -89,5 +89,5 @@ jupyter lite build --XeusPythonEnv.empack_config=empack_config.yaml
 ```{note}
 The xeus-python kernel automatically handles the filtering of files using the default configuration mentioned above.
 
-Filtering files can help reduce the size of the assets to download.
+Filtering files can help reduce the size of the assets to download and as a consequence reduce network traffic.
 ```
