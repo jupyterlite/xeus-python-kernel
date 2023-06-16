@@ -51,12 +51,17 @@
     "watch:labextension": "jupyter labextension watch ."
   },
   "dependencies": {
+    "@jupyterlab/coreutils": "^6.0.2",
+    "@jupyterlab/services": "^7.0.2",
     "@jupyterlite/contents": "^0.1.0",
+    "@jupyterlite/kernel": "^0.1.0",
     "@jupyterlite/server": "^0.1.0",
+    "@lumino/coreutils": "^2.1.1",
+    "@lumino/signaling": "^2.1.1",
     "comlink": "^4.3.1"
   },
   "devDependencies": {
-    "@jupyterlab/builder": "^3.4.1",
+    "@jupyterlab/builder": "^4.0.2",
     "@typescript-eslint/eslint-plugin": "^4.8.1",
     "@typescript-eslint/parser": "^4.8.1",
     "copy-webpack-plugin": "^9.0.1",
@@ -72,6 +77,7 @@
     "source-map-loader": "^4.0.0",
     "typescript": "~4.2.3",
     "webpack": "^5.87.0",
+    "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1"
   },
   "sideEffects": [
