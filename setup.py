@@ -19,7 +19,7 @@ lab_path = (
 # Representative files that should exist after a successful build
 ensured_targets = [
     str(lab_path / "package.json"),
-    str(lab_path / "static" / "python_data.js"),
+    str(lab_path / "static" / "empack_env_meta.json"),
     str(lab_path / "static" / "xpython_wasm.js"),
     str(lab_path / "static" / "xpython_wasm.wasm"),
     str(lab_path / "static" / "style.js"),
