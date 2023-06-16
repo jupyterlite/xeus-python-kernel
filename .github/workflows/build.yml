@@ -29,8 +29,8 @@ jobs:
           jlpm
           jlpm run build
           jlpm run eslint:check
-          python -m pip install -v .
-
+          python -m pip install -v -e .
+          jupyter labextension develop . --overwrite
           jupyter labextension list 2>&1 | grep -ie "@jupyterlite/xeus-python-kernel.*OK"
 
       - name: Build the extension
