@@ -4,7 +4,7 @@ channels:
 dependencies:
   - python
   - pip
-  - jupyterlab
+  - jupyterlab >=3.5,<3.6
   - traitlets
   - requests
   - typer
