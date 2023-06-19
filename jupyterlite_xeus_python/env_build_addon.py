@@ -104,12 +104,6 @@ class XeusPythonEnv(FederatedExtensionAddon):
                     actions=[(self.copy_one, [item, dest / file])],
                 )
 
-                js_item  = Path(self.cwd.name) / (str(item.stem) + '.js')
-                js_file = js_item.name
-                yield dict(
-                    name=f"xeus:copy:{js_file}",
-                    actions=[(self.copy_one, [js_item, dest / js_file])],
-                )
 
 
         for file in [
