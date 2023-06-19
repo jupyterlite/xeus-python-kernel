@@ -12,7 +12,7 @@ import yaml
 
 from traitlets import List, Unicode
 
-from empack.file_packager import pack_environment
+from empack.pack import pack_env, DEFAULT_CONFIG_PATH
 from empack.file_patterns import PkgFileFilter, pkg_file_filter_from_yaml
 
 from jupyterlite_core.constants import (
