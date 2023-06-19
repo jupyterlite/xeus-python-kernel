@@ -107,7 +107,7 @@ class XeusPythonEnv(FederatedExtensionAddon):
 
 
         for file in [
-            "empack_env_meta.json"
+            "empack_env_meta.json",
             "xpython_wasm.js",
             "xpython_wasm.wasm",
         ]:
