@@ -37,6 +37,28 @@ CHANNELS = [
 PLATFORM = "emscripten-32"
 
 
+def fix_specs(specs):
+    """Fix specs packages if needed"""
+    # Pin ipywidgets to a version that is known to work with JupyterLab 3 and 4
+    if "ipywidgets" in specs:
+        specs.remove("ipywidgets")
+
+        if "jupyterlab_widgets" in specs:
+            specs.remove("jupyterlab_widgets")
+
+        specs.append("ipywidgets=8.0.6")
+        specs.append("jupyterlab_widgets=3.0.7")
+
+    # Pin pandas to a known working version
+    # pandas 2.x is broken on emscripten-forge as of today
+    # https://github.com/emscripten-forge/recipes/pull/593
+    if "pandas" in specs:
+        specs.remove("pandas")
+        specs.append("pandas==1.4.3")
+
+    return specs
+
+
 def create_env(
     env_name,
     root_prefix,
@@ -176,6 +198,9 @@ def build_and_pack_emscripten_env(
     # Bail early if there is nothing to do
     if bail_early and not force:
         return []
+
+    # Fix specs packages if needed
+    specs = fix_specs(specs)
 
     orig_config = os.environ.get("CONDARC")
 
