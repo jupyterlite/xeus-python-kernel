@@ -1,9 +1,11 @@
+import csv
 import os
 from copy import copy
 from pathlib import Path
 import requests
 import shutil
 from subprocess import check_call, run, DEVNULL
+from tempfile import TemporaryDirectory
 from typing import List
 from urllib.parse import urlparse
 import sys
@@ -123,36 +125,57 @@ def _create_config(prefix_path):
 
 
 def _install_pip_dependencies(prefix_path, dependencies, log=None):
-    env = os.environ.copy()
-
-    env["VIRTUAL_ENV"] = prefix_path
-    env["PYTHONPATH"] = (
-        prefix_path / "lib" / f"python{PYTHON_VERSION}" / "site-packages"
-    )
+    # Why is this so damn complicated?
+    # Isn't it easier to download the .whl ourselves? pip is hell
 
     if log is not None:
         log.warning(
             """
-            Installing pip dependencies. Use this feature at your own risks.
-            Note that you can only install pure-python packages, pip is being run with the
-            --no-deps option to not pull undesired system-specific dependencies.
+            Installing pip dependencies. This is very much experimental so use this feature at your own risks.
+            Note that you can only install pure-python packages.
+            pip is being run with the --no-deps option to not pull undesired system-specific dependencies, so please
+            install your package dependencies from emscripten-forge or conda-forge.
             """
         )
+
+    # Installing with pip in another prefix that has a different Python version IS NOT POSSIBLE
+    # So we need to do this whole mess "manually"
+    pkg_dir = TemporaryDirectory()
 
     run(
         [
             "pip",
             "install",
             *dependencies,
-            "--prefix",
-            prefix_path,
+            # Install in a tmp directory while we process it
+            "--target",
+            pkg_dir.name,
+            # Specify the right Python version
+            "--python-version",
+            PYTHON_VERSION,
+            # No dependency installed
             "--no-deps",
             "--no-input",
             "--verbose",
         ],
-        env=env,
         check=True,
     )
+
+    # We need to read the RECORD and try to be smart about what goes
+    # under site-packages and what goes where
+    package_dist_info = Path(pkg_dir.name).glob("*.dist-info")[0]
+
+    with open(dist_info / "RECORD") as record:
+        files = csv.reader(record)
+        all_files = [_file[0] for _file in files]
+
+        files_outside_site_packages = [
+            _file for _file in all_files if _file.startswith("../../")
+        ]
+
+        # COPY files that are outside site packages under `prefix_path`
+        # COPY files that are inside site packages (including the dist-info) under `prefix_path / "lib" / f"python{PYTHON_VERSION} / "site-packages"
+        # PATCH the dist-info/RECORD with the new paths to assets outside site packages
 
 
 def build_and_pack_emscripten_env(
