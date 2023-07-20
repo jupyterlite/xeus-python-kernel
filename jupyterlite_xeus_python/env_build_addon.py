@@ -85,6 +85,7 @@ class XeusPythonEnv(FederatedExtensionAddon):
             environment_file=Path(self.manager.lite_dir) / self.environment_file,
             empack_config=self.empack_config,
             output_path=self.cwd.name,
+            log=self.log,
         )
 
         # Find the federated extensions in the emscripten-env and install them

@@ -122,7 +122,23 @@ def _create_config(prefix_path):
     os.environ["CONDARC"] = str(prefix_path / ".condarc")
 
 
-def _install_pip_dependencies(prefix_path, dependencies):
+def _install_pip_dependencies(prefix_path, dependencies, log=None):
+    env = os.environ.copy()
+
+    env["VIRTUAL_ENV"] = prefix_path
+    env["PYTHONPATH"] = (
+        prefix_path / "lib" / f"python{PYTHON_VERSION}" / "site-packages"
+    )
+
+    if log is not None:
+        log.warning(
+            """
+            Installing pip dependencies. Use this feature at your own risks.
+            Note that you can only install pure-python packages, pip is being run with the
+            --no-deps option to not pull undesired system-specific dependencies.
+            """
+        )
+
     run(
         [
             "pip",
@@ -130,11 +146,11 @@ def _install_pip_dependencies(prefix_path, dependencies):
             *dependencies,
             "--prefix",
             prefix_path,
-            "--python-version",
-            PYTHON_VERSION,
+            "--no-deps",
             "--no-input",
             "--verbose",
         ],
+        env=env,
         check=True,
     )
 
@@ -150,6 +166,7 @@ def build_and_pack_emscripten_env(
     output_path: str = ".",
     build_worker: bool = False,
     force: bool = False,
+    log=None,
 ):
     """Build a conda environment for the emscripten platform and pack it with empack."""
     channels = copy(CHANNELS)
@@ -213,7 +230,7 @@ def build_and_pack_emscripten_env(
 
         # Install pip dependencies
         if pip_dependencies:
-            _install_pip_dependencies(prefix_path, pip_dependencies)
+            _install_pip_dependencies(prefix_path, pip_dependencies, log=log)
 
         pack_kwargs = {}
 
