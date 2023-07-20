@@ -226,9 +226,7 @@ def build_and_pack_emscripten_env(
                     yaml.safe_load(empack_config_content)
                 )
             else:
-                pack_kwargs["file_filters"] = pkg_file_filter_from_yaml(
-                    empack_config
-                )
+                pack_kwargs["file_filters"] = pkg_file_filter_from_yaml(empack_config)
         else:
             pack_kwargs["file_filters"] = pkg_file_filter_from_yaml(DEFAULT_CONFIG_PATH)
 
@@ -258,13 +256,16 @@ def build_and_pack_emscripten_env(
 
             worker = worker.replace("XEUS_KERNEL_FILE", "'xpython_wasm.js'")
             worker = worker.replace("LANGUAGE_DATA_FILE", "'python_data.js'")
-            worker = worker.replace("importScripts(DATA_FILE);", """
+            worker = worker.replace(
+                "importScripts(DATA_FILE);",
+                """
                 await globalThis.Module.bootstrap_from_empack_packed_environment(
                 `./empack_env_meta.json`, /* packages_json_url */
                 ".",               /* package_tarballs_root_url */
                 false              /* verbose */
             );
-            """)
+            """,
+            )
             with open(Path(output_path) / "worker.ts", "w") as fobj:
                 fobj.write(worker)
 

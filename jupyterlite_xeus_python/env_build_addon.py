@@ -38,7 +38,6 @@ class PackagesList(List):
 
 
 class XeusPythonEnv(FederatedExtensionAddon):
-
     __all__ = ["post_build"]
 
     xeus_python_version = Unicode(XEUS_PYTHON_VERSION).tag(
@@ -99,16 +98,13 @@ class XeusPythonEnv(FederatedExtensionAddon):
         dest = self.output_extensions / "@jupyterlite" / "xeus-python-kernel" / "static"
 
         # copy *.tar.gz for all side packages
-        for item in Path(self.cwd.name) .iterdir():
+        for item in Path(self.cwd.name).iterdir():
             if item.suffix == ".gz":
-
                 file = item.name
                 yield dict(
                     name=f"xeus:copy:{file}",
                     actions=[(self.copy_one, [item, dest / file])],
                 )
-
-
 
         for file in [
             "empack_env_meta.json",
