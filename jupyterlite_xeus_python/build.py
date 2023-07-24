@@ -163,19 +163,44 @@ def _install_pip_dependencies(prefix_path, dependencies, log=None):
 
     # We need to read the RECORD and try to be smart about what goes
     # under site-packages and what goes where
-    package_dist_info = Path(pkg_dir.name).glob("*.dist-info")[0]
+    packages_dist_info = Path(pkg_dir.name).glob("*.dist-info")
 
-    with open(dist_info / "RECORD") as record:
-        files = csv.reader(record)
-        all_files = [_file[0] for _file in files]
+    for package_dist_info in packages_dist_info:
+        with open(package_dist_info / "RECORD", "r") as record:
+            record_csv = csv.reader(record)
+            all_files = [_file[0] for _file in record_csv]
 
-        files_outside_site_packages = [
-            _file for _file in all_files if _file.startswith("../../")
-        ]
+            non_supported_files = [".so", ".a", ".dylib", ".lib", ".exe" ".dll"]
 
-        # COPY files that are outside site packages under `prefix_path`
-        # COPY files that are inside site packages (including the dist-info) under `prefix_path / "lib" / f"python{PYTHON_VERSION} / "site-packages"
-        # PATCH the dist-info/RECORD with the new paths to assets outside site packages
+            # List of tuples: (path: str, inside_site_packages: bool)
+            files = [
+                (_file, not _file.startswith("../../")) for _file in all_files
+            ]
+
+            # Why?
+            record_data = record.read().replace("../../", "../../../")
+
+        # OVERWRITE RECORD file
+        with open(package_dist_info / "RECORD", "w") as record:
+            record.write(record_data)
+
+        # COPY files under `prefix_path`
+        for (_file, inside_site_packages) in files:
+            path = Path(_file)
+
+            # FAIL if .so / .a / .dylib / .lib / .exe / .dll
+            if path.suffix in non_supported_files:
+                raise RuntimeError("Cannot install binary PyPi package, only pure Python packages are supported")
+
+            file_path = _file[6:] if not inside_site_packages else _file
+            install_path = prefix_path if not inside_site_packages else prefix_path / "lib" / f"python{PYTHON_VERSION}" / "site-packages"
+
+            src_path = Path(pkg_dir.name) / file_path
+            dest_path = install_path / file_path
+
+            os.makedirs(dest_path.parent, exist_ok=True)
+
+            shutil.copy(src_path, dest_path)
 
 
 def build_and_pack_emscripten_env(
