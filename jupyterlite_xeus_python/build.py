@@ -174,9 +174,7 @@ def _install_pip_dependencies(prefix_path, dependencies, log=None):
             non_supported_files = [".so", ".a", ".dylib", ".lib", ".exe" ".dll"]
 
             # List of tuples: (path: str, inside_site_packages: bool)
-            files = [
-                (_file, not _file.startswith("../../")) for _file in all_files
-            ]
+            files = [(_file, not _file.startswith("../../")) for _file in all_files]
 
             # Why?
             fixed_record_data = record_content.replace("../../", "../../../")
@@ -186,15 +184,21 @@ def _install_pip_dependencies(prefix_path, dependencies, log=None):
             record.write(fixed_record_data)
 
         # COPY files under `prefix_path`
-        for (_file, inside_site_packages) in files:
+        for _file, inside_site_packages in files:
             path = Path(_file)
 
             # FAIL if .so / .a / .dylib / .lib / .exe / .dll
             if path.suffix in non_supported_files:
-                raise RuntimeError("Cannot install binary PyPi package, only pure Python packages are supported")
+                raise RuntimeError(
+                    "Cannot install binary PyPi package, only pure Python packages are supported"
+                )
 
             file_path = _file[6:] if not inside_site_packages else _file
-            install_path = prefix_path if not inside_site_packages else prefix_path / "lib" / f"python{PYTHON_VERSION}" / "site-packages"
+            install_path = (
+                prefix_path
+                if not inside_site_packages
+                else prefix_path / "lib" / f"python{PYTHON_VERSION}" / "site-packages"
+            )
 
             src_path = Path(pkg_dir.name) / file_path
             dest_path = install_path / file_path
