@@ -167,7 +167,8 @@ def _install_pip_dependencies(prefix_path, dependencies, log=None):
 
     for package_dist_info in packages_dist_info:
         with open(package_dist_info / "RECORD", "r") as record:
-            record_csv = csv.reader(record)
+            record_content = record.read()
+            record_csv = csv.reader(record_content.splitlines())
             all_files = [_file[0] for _file in record_csv]
 
             non_supported_files = [".so", ".a", ".dylib", ".lib", ".exe" ".dll"]
@@ -178,11 +179,11 @@ def _install_pip_dependencies(prefix_path, dependencies, log=None):
             ]
 
             # Why?
-            record_data = record.read().replace("../../", "../../../")
+            fixed_record_data = record_content.replace("../../", "../../../")
 
         # OVERWRITE RECORD file
         with open(package_dist_info / "RECORD", "w") as record:
-            record.write(record_data)
+            record.write(fixed_record_data)
 
         # COPY files under `prefix_path`
         for (_file, inside_site_packages) in files:
