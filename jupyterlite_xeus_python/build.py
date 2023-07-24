@@ -190,7 +190,7 @@ def _install_pip_dependencies(prefix_path, dependencies, log=None):
             # FAIL if .so / .a / .dylib / .lib / .exe / .dll
             if path.suffix in non_supported_files:
                 raise RuntimeError(
-                    "Cannot install binary PyPi package, only pure Python packages are supported"
+                    "Cannot install binary PyPI package, only pure Python packages are supported"
                 )
 
             file_path = _file[6:] if not inside_site_packages else _file
