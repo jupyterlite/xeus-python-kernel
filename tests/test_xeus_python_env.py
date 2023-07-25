@@ -121,3 +121,5 @@ def test_python_env_from_file_3():
     assert os.path.isfile(
         "/tmp/xeus-python-kernel/envs/xeus-python-kernel-3/lib/python3.10/site-packages/test_package/hey.py"
     )
+
+    os.remove(Path(addon.cwd.name) / "empack_env_meta.json")
