@@ -4,6 +4,8 @@ import os
 from tempfile import TemporaryDirectory
 from pathlib import Path
 
+import pytest
+
 from jupyterlite_core.app import LiteStatusApp
 
 from jupyterlite_xeus_python.env_build_addon import XeusPythonEnv
@@ -86,3 +88,16 @@ def test_python_env_from_file_1():
     assert os.path.isfile(Path(addon.cwd.name) / "empack_env_meta.json")
 
     os.remove(Path(addon.cwd.name) / "empack_env_meta.json")
+
+
+def test_python_env_from_file_2():
+    app = LiteStatusApp(log_level="DEBUG")
+    app.initialize()
+    manager = app.lite_manager
+
+    addon = XeusPythonEnv(manager)
+    addon.environment_file = "environment-2.yml"
+
+    with pytest.raises(RuntimeError, match="Cannot install binary PyPI package"):
+        for step in addon.post_build(manager):
+            pass
