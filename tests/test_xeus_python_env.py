@@ -116,8 +116,8 @@ def test_python_env_from_file_3():
 
     # Test
     assert os.path.isdir(
-        "/tmp/xeus-python-kernel/envs/xeus-python-kernel-1/lib/python3.10/site-packages/test_package"
+        "/tmp/xeus-python-kernel/envs/xeus-python-kernel-3/lib/python3.10/site-packages/test_package"
     )
     assert os.path.isfile(
-        "/tmp/xeus-python-kernel/envs/xeus-python-kernel-1/lib/python3.10/site-packages/test_package/hey.py"
+        "/tmp/xeus-python-kernel/envs/xeus-python-kernel-3/lib/python3.10/site-packages/test_package/hey.py"
     )
