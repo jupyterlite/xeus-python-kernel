@@ -101,3 +101,23 @@ def test_python_env_from_file_2():
     with pytest.raises(RuntimeError, match="Cannot install binary PyPI package"):
         for step in addon.post_build(manager):
             pass
+
+
+def test_python_env_from_file_3():
+    app = LiteStatusApp(log_level="DEBUG")
+    app.initialize()
+    manager = app.lite_manager
+
+    addon = XeusPythonEnv(manager)
+    addon.environment_file = "test_package/environment-3.yml"
+
+    for step in addon.post_build(manager):
+        pass
+
+    # Test
+    assert os.path.isdir(
+        "/tmp/xeus-python-kernel/envs/xeus-python-kernel-1/lib/python3.10/site-packages/test_package"
+    )
+    assert os.path.isfile(
+        "/tmp/xeus-python-kernel/envs/xeus-python-kernel-1/lib/python3.10/site-packages/test_package/hey.py"
+    )
