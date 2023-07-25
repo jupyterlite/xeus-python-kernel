@@ -90,19 +90,6 @@ def test_python_env_from_file_1():
     os.remove(Path(addon.cwd.name) / "empack_env_meta.json")
 
 
-def test_python_env_from_file_2():
-    app = LiteStatusApp(log_level="DEBUG")
-    app.initialize()
-    manager = app.lite_manager
-
-    addon = XeusPythonEnv(manager)
-    addon.environment_file = "environment-2.yml"
-
-    with pytest.raises(RuntimeError, match="Cannot install binary PyPI package"):
-        for step in addon.post_build(manager):
-            pass
-
-
 def test_python_env_from_file_3():
     app = LiteStatusApp(log_level="DEBUG")
     app.initialize()
@@ -123,3 +110,16 @@ def test_python_env_from_file_3():
     )
 
     os.remove(Path(addon.cwd.name) / "empack_env_meta.json")
+
+
+def test_python_env_from_file_2():
+    app = LiteStatusApp(log_level="DEBUG")
+    app.initialize()
+    manager = app.lite_manager
+
+    addon = XeusPythonEnv(manager)
+    addon.environment_file = "environment-2.yml"
+
+    with pytest.raises(RuntimeError, match="Cannot install binary PyPI package"):
+        for step in addon.post_build(manager):
+            pass
