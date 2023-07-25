@@ -57,6 +57,31 @@ def test_python_env_from_file_1():
         "/tmp/xeus-python-kernel/envs/xeus-python-kernel-1/bin/xpython_wasm.wasm"
     )
 
+    # Checking pip packages
+    assert os.path.isdir(
+        "/tmp/xeus-python-kernel/envs/xeus-python-kernel-1/lib/python3.10"
+    )
+    assert os.path.isdir(
+        "/tmp/xeus-python-kernel/envs/xeus-python-kernel-1/lib/python3.10/site-packages"
+    )
+    assert os.path.isdir(
+        "/tmp/xeus-python-kernel/envs/xeus-python-kernel-1/lib/python3.10/site-packages/ipywidgets"
+    )
+    assert os.path.isdir(
+        "/tmp/xeus-python-kernel/envs/xeus-python-kernel-1/lib/python3.10/site-packages/ipycanvas"
+    )
+    assert os.path.isdir(
+        "/tmp/xeus-python-kernel/envs/xeus-python-kernel-1/lib/python3.10/site-packages/py2vega"
+    )
+
+    # Checking labextensions
+    assert os.path.isdir(
+        "/tmp/xeus-python-kernel/envs/xeus-python-kernel-1/share/jupyter/labextensions/@jupyter-widgets/jupyterlab-manager"
+    )
+    assert os.path.isdir(
+        "/tmp/xeus-python-kernel/envs/xeus-python-kernel-1/share/jupyter/labextensions/ipycanvas"
+    )
+
     # Check empack output
     assert os.path.isfile(Path(addon.cwd.name) / "empack_env_meta.json")
 
