@@ -12,3 +12,4 @@ dependencies:
   - typer
   - pytest
   - empack >=3,<4
+  - nodejs=20
