@@ -12,7 +12,7 @@ dependencies:
   - linkify-it-py
   - myst-parser
   - pydata-sphinx-theme
-  - jupyterlab >=3.5.3,<3.6
+  - jupyterlab >=4.0.5,<5
   - jupyterlite-core >=0.2.0a0,<0.3.0
   - jupyterlite-sphinx >=0.9.1
   - empack >=3.1.0
