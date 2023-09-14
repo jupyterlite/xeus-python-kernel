@@ -2,6 +2,7 @@ name: xeus-python-kernel-docs
 
 channels:
   - conda-forge
+  - conda-forge/label/jupyterlite_core_alpha
 
 dependencies:
   - python=3.10
