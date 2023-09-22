@@ -6,7 +6,7 @@ dependencies:
   - python
   - pip
   - jupyterlab >=4.0,<5
-  - jupyterlite-core >=0.2.0a0,<0.3.0
+  - jupyterlite-core >=0.2.0a1,<0.3.0
   - traitlets
   - requests
   - typer

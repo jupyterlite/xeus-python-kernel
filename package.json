@@ -53,9 +53,9 @@
   "dependencies": {
     "@jupyterlab/coreutils": "^6",
     "@jupyterlab/services": "^7",
-    "@jupyterlite/contents": "^0.2.0-alpha.0",
-    "@jupyterlite/kernel": "^0.2.0-alpha.0",
-    "@jupyterlite/server": "^0.2.0-alpha.0",
+    "@jupyterlite/contents": "^0.2.0-alpha.1",
+    "@jupyterlite/kernel": "^0.2.0-alpha.1",
+    "@jupyterlite/server": "^0.2.0-alpha.1",
     "@lumino/coreutils": "^2",
     "@lumino/signaling": "^2",
     "comlink": "^4.3.1"
