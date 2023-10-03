@@ -74,6 +74,7 @@ def create_env(
                 MICROMAMBA_COMMAND,
                 "create",
                 "--yes",
+                "--no-pyc",
                 "--root-prefix",
                 root_prefix,
                 "--name",
