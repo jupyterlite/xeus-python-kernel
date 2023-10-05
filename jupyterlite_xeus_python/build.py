@@ -1,19 +1,17 @@
 import csv
 import os
-from pathlib import Path
-import requests
 import shutil
+from pathlib import Path
 from subprocess import run
 from tempfile import TemporaryDirectory
-from typing import List
+from typing import List, Optional
 from urllib.parse import urlparse
 
-import yaml
-
-from empack.pack import pack_env, DEFAULT_CONFIG_PATH
-from empack.file_patterns import PkgFileFilter, pkg_file_filter_from_yaml
-
+import requests
 import typer
+import yaml
+from empack.file_patterns import PkgFileFilter, pkg_file_filter_from_yaml
+from empack.pack import DEFAULT_CONFIG_PATH, pack_env
 
 try:
     from mamba.api import create as mamba_create
@@ -164,7 +162,7 @@ def _install_pip_dependencies(prefix_path, dependencies, log=None):
     packages_dist_info = Path(pkg_dir.name).glob("*.dist-info")
 
     for package_dist_info in packages_dist_info:
-        with open(package_dist_info / "RECORD", "r") as record:
+        with open(package_dist_info / "RECORD") as record:
             record_content = record.read()
             record_csv = csv.reader(record_content.splitlines())
             all_files = [_file[0] for _file in record_csv]
@@ -179,7 +177,7 @@ def _install_pip_dependencies(prefix_path, dependencies, log=None):
         with open(package_dist_info / "RECORD", "w") as record:
             record.write(fixed_record_data)
 
-        non_supported_files = [".so", ".a", ".dylib", ".lib", ".exe" ".dll"]
+        non_supported_files = [".so", ".a", ".dylib", ".lib", ".exe.dll"]
 
         # COPY files under `prefix_path`
         for _file, inside_site_packages in files:
@@ -209,7 +207,7 @@ def _install_pip_dependencies(prefix_path, dependencies, log=None):
 def build_and_pack_emscripten_env(
     python_version: str = PYTHON_VERSION,
     xeus_python_version: str = XEUS_PYTHON_VERSION,
-    packages: List[str] = [],
+    packages: Optional[List[str]] = None,
     environment_file: str = "",
     root_prefix: str = "/tmp/xeus-python-kernel",
     env_name: str = "xeus-python-kernel",
@@ -220,6 +218,8 @@ def build_and_pack_emscripten_env(
     log=None,
 ):
     """Build a conda environment for the emscripten platform and pack it with empack."""
+    if packages is None:
+        packages = []
     channels = CHANNELS
     specs = [
         f"python={python_version}",
@@ -324,7 +324,7 @@ def build_and_pack_emscripten_env(
                 dirs_exist_ok=True,
             )
 
-            with open(Path(output_path) / "worker.ts", "r") as fobj:
+            with open(Path(output_path) / "worker.ts") as fobj:
                 worker = fobj.read()
 
             worker = worker.replace("XEUS_KERNEL_FILE", "'xpython_wasm.js'")

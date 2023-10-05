@@ -1,11 +1,9 @@
 """Test creating Python envs for jupyterlite-xeus-python."""
 
 import os
-from tempfile import TemporaryDirectory
 from pathlib import Path
 
 import pytest
-
 from jupyterlite_core.app import LiteStatusApp
 
 from jupyterlite_xeus_python.env_build_addon import XeusPythonEnv
@@ -19,7 +17,7 @@ def test_python_env():
     addon = XeusPythonEnv(manager)
     addon.packages = ["numpy", "ipyleaflet"]
 
-    for step in addon.post_build(manager):
+    for _step in addon.post_build(manager):
         pass
 
     # Check env
@@ -42,7 +40,7 @@ def test_python_env_from_file_1():
     addon = XeusPythonEnv(manager)
     addon.environment_file = "environment-1.yml"
 
-    for step in addon.post_build(manager):
+    for _step in addon.post_build(manager):
         pass
 
     # Check env
@@ -88,7 +86,7 @@ def test_python_env_from_file_3():
     addon = XeusPythonEnv(manager)
     addon.environment_file = "test_package/environment-3.yml"
 
-    for step in addon.post_build(manager):
+    for _step in addon.post_build(manager):
         pass
 
     # Test
@@ -111,5 +109,5 @@ def test_python_env_from_file_2():
     addon.environment_file = "environment-2.yml"
 
     with pytest.raises(RuntimeError, match="Cannot install binary PyPI package"):
-        for step in addon.post_build(manager):
+        for _step in addon.post_build(manager):
             pass

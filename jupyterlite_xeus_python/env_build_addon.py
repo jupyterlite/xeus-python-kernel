@@ -4,16 +4,15 @@ import os
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from traitlets import List, Unicode
-
-from jupyterlite_core.constants import (
-    SHARE_LABEXTENSIONS,
-    LAB_EXTENSIONS,
-    JUPYTERLITE_JSON,
-    UTF8,
-    FEDERATED_EXTENSIONS,
-)
 from jupyterlite_core.addons.federated_extensions import FederatedExtensionAddon
+from jupyterlite_core.constants import (
+    FEDERATED_EXTENSIONS,
+    JUPYTERLITE_JSON,
+    LAB_EXTENSIONS,
+    SHARE_LABEXTENSIONS,
+    UTF8,
+)
+from traitlets import List, Unicode
 
 from .build import XEUS_PYTHON_VERSION, build_and_pack_emscripten_env
 
@@ -54,7 +53,7 @@ class XeusPythonEnv(FederatedExtensionAddon):
     )
 
     def __init__(self, *args, **kwargs):
-        super(XeusPythonEnv, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         self.cwd = TemporaryDirectory()
 
