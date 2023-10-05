@@ -131,8 +131,9 @@ def _install_pip_dependencies(prefix_path, dependencies, log=None):
             Installing pip dependencies. This is very much experimental so use
             this feature at your own risks.
             Note that you can only install pure-python packages.
-            pip is being run with the --no-deps option to not pull undesired system-specific dependencies, so please
-            install your package dependencies from emscripten-forge or conda-forge.
+            pip is being run with the --no-deps option to not pull undesired
+            system-specific dependencies, so please install your package dependencies
+            from emscripten-forge or conda-forge.
             """
         )
 
@@ -206,7 +207,7 @@ def _install_pip_dependencies(prefix_path, dependencies, log=None):
             shutil.copy(src_path, dest_path)
 
 
-def build_and_pack_emscripten_env(
+def build_and_pack_emscripten_env(  # noqa: C901, PLR0912, PLR0915
     python_version: str = PYTHON_VERSION,
     xeus_python_version: str = XEUS_PYTHON_VERSION,
     packages: Optional[List[str]] = None,

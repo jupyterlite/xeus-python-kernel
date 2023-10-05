@@ -124,7 +124,9 @@ ignore = [
   # extended flake8 ignore
   "D104", "D100", "EM101",
   # Probable insecure usage of temporary file or directory
-  "S108"
+  "S108",
+  # RUF012 Mutable class attributes should be annotated with `typing.ClassVar`
+  "RUF012",
 ]
 
 [tool.ruff.per-file-ignores]
@@ -132,3 +134,7 @@ ignore = [
 # F841 Local variable `foo` is assigned to but never used
 # PLR2004 Magic value used in comparison
 "tests/*" = ["S101", "F841", "PLR2004"]
+
+# E501 `subprocess` call: check for execution of untrusted input
+# S603 `subprocess` call: check for execution of untrusted input
+"jupyterlite_xeus_python/build.py" = ["E501", "S603"]
