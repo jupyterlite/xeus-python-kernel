@@ -16,6 +16,9 @@ jobs:
 
       - name: Install jupyterlite-xeus-python
         run: |
+          # install JupyterLab to get jlpm
+          python -m pip install jupyterlab~=4.0
+
           jlpm
           jlpm run build
           python -m pip install -v .
