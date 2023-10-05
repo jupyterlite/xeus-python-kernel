@@ -46,7 +46,7 @@ jobs:
 
       - name: Lint
         run: |
-          jlpm run lint:check
+          jlpm run eslint:check
 
       - name: Build the extension
         run: python -m build
