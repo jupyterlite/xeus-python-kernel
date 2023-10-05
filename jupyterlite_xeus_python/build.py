@@ -1,6 +1,7 @@
 import csv
 import os
 import shutil
+import sys
 from pathlib import Path
 from subprocess import run
 from tempfile import TemporaryDirectory
@@ -143,6 +144,8 @@ def _install_pip_dependencies(prefix_path, dependencies, log=None):
 
     run(
         [
+            sys.executable,
+            "-m",
             "pip",
             "install",
             *dependencies,
