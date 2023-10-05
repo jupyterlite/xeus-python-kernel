@@ -123,9 +123,7 @@ class XeusPythonEnv(FederatedExtensionAddon):
         stem = json.loads(pkg_json.read_text(**UTF8))["name"]
         dest = self.output_extensions / stem
         file_dep = [
-            p
-            for p in pkg_path.rglob("*")
-            if not (p.is_dir() or self.is_ignored_sourcemap(p.name))
+            p for p in pkg_path.rglob("*") if not (p.is_dir() or self.is_ignored_sourcemap(p.name))
         ]
 
         yield dict(

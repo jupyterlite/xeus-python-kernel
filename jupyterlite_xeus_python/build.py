@@ -224,9 +224,7 @@ def build_and_pack_emscripten_env(
     specs = [
         f"python={python_version}",
         "xeus-lite",
-        "xeus-python"
-        if not xeus_python_version
-        else f"xeus-python={xeus_python_version}",
+        "xeus-python" if not xeus_python_version else f"xeus-python={xeus_python_version}",
         *packages,
     ]
     bail_early = True
@@ -259,7 +257,11 @@ def build_and_pack_emscripten_env(
                 elif isinstance(dependency, dict) and dependency.get("pip") is not None:
                     # If it's a local Python package, make its path relative to the environment file
                     pip_dependencies = [
-                        ((env_file.parent / pip_dep).resolve() if os.path.isdir(env_file.parent / pip_dep) else pip_dep)
+                        (
+                            (env_file.parent / pip_dep).resolve()
+                            if os.path.isdir(env_file.parent / pip_dep)
+                            else pip_dep
+                        )
                         for pip_dep in dependency["pip"]
                     ]
 
@@ -354,9 +356,7 @@ def build_and_pack_emscripten_env(
 def main(
     python_version: str = PYTHON_VERSION,
     xeus_python_version: str = XEUS_PYTHON_VERSION,
-    packages: List[str] = typer.Option(
-        [], help="The list of packages you want to install"
-    ),
+    packages: List[str] = typer.Option([], help="The list of packages you want to install"),
     environment_file: str = typer.Option(
         "", help="The path to the environment.yml file you want to use"
     ),
