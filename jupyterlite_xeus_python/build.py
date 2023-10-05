@@ -267,7 +267,7 @@ def build_and_pack_emscripten_env(
 
     # Bail early if there is nothing to do
     if bail_early and not force:
-        return []
+        return ""
 
     orig_config = os.environ.get("CONDARC")
 

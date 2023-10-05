@@ -2,18 +2,9 @@
 import json
 import os
 from pathlib import Path
-import requests
-import shutil
-from subprocess import check_call, run, DEVNULL
 from tempfile import TemporaryDirectory
-from urllib.parse import urlparse
-
-import yaml
 
 from traitlets import List, Unicode
-
-from empack.pack import pack_env, DEFAULT_CONFIG_PATH
-from empack.file_patterns import PkgFileFilter, pkg_file_filter_from_yaml
 
 from jupyterlite_core.constants import (
     SHARE_LABEXTENSIONS,
@@ -42,7 +33,7 @@ class XeusPythonEnv(FederatedExtensionAddon):
     )
 
     empack_config = Unicode(
-        None,
+        "",
         config=True,
         allow_none=True,
         description="The path or URL to the empack config file",
