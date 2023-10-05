@@ -36,6 +36,7 @@ CHANNELS = [
 ]
 
 PLATFORM = "emscripten-32"
+DEFAULT_REQUEST_TIMEOUT = 1  # in minutes
 
 
 def create_env(
@@ -127,7 +128,8 @@ def _install_pip_dependencies(prefix_path, dependencies, log=None):
     if log is not None:
         log.warning(
             """
-            Installing pip dependencies. This is very much experimental so use this feature at your own risks.
+            Installing pip dependencies. This is very much experimental so use
+            this feature at your own risks.
             Note that you can only install pure-python packages.
             pip is being run with the --no-deps option to not pull undesired system-specific dependencies, so please
             install your package dependencies from emscripten-forge or conda-forge.
@@ -294,7 +296,9 @@ def build_and_pack_emscripten_env(
         if empack_config:
             empack_config_is_url = urlparse(empack_config).scheme in ("http", "https")
             if empack_config_is_url:
-                empack_config_content = requests.get(empack_config).content
+                empack_config_content = requests.get(
+                    empack_config, timeout=DEFAULT_REQUEST_TIMEOUT
+                ).content
                 pack_kwargs["file_filters"] = PkgFileFilter.parse_obj(
                     yaml.safe_load(empack_config_content)
                 )

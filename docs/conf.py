@@ -1,4 +1,3 @@
-
 extensions = [
     "jupyterlite_sphinx",
     "myst_parser",
