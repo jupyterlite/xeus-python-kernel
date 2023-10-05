@@ -1,14 +1,12 @@
 import csv
 import os
-from copy import copy
 from pathlib import Path
 import requests
 import shutil
-from subprocess import check_call, run, DEVNULL
+from subprocess import run
 from tempfile import TemporaryDirectory
 from typing import List
 from urllib.parse import urlparse
-import sys
 
 import yaml
 

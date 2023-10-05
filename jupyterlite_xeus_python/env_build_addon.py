@@ -35,7 +35,6 @@ class XeusPythonEnv(FederatedExtensionAddon):
     empack_config = Unicode(
         "",
         config=True,
-        allow_none=True,
         description="The path or URL to the empack config file",
     )
 
