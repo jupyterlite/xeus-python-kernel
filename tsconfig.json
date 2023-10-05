@@ -5,6 +5,7 @@
     "declaration": true,
     "esModuleInterop": true,
     "incremental": true,
+    "lib": ["ES2019", "WebWorker", "ScriptHost", "DOM", "DOM.Iterable"],
     "jsx": "react",
     "module": "esnext",
     "moduleResolution": "node",
@@ -17,7 +18,7 @@
     "rootDir": "src",
     "strict": true,
     "strictNullChecks": true,
-    "target": "ES2018"
+    "target": "ES2019"
   },
   "include": ["src/*"]
 }
