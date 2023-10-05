@@ -16,7 +16,9 @@ jobs:
 
       - name: Install jupyterlite-xeus-python
         run: |
-          python -m pip install .
+          jlpm
+          jlpm run build
+          python -m pip install -v .
 
       - name: Build UI tests
         run: |
