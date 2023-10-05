@@ -56,7 +56,7 @@ Then you only need to build JupyterLite:
 jupyter lite build
 ```
 
-You can also pick another name for that environment file (*e.g.* `custom.yml`), by doing so, you will need to specify that name to xeus-python:
+You can also pick another name for that environment file (_e.g._ `custom.yml`), by doing so, you will need to specify that name to xeus-python:
 
 ```bash
 jupyter lite build --XeusPythonEnv.environment_file=custom.yml
