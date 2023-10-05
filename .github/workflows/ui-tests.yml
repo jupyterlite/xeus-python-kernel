@@ -11,14 +11,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Base Setup
-        uses: jupyterlab/maintainer-tools/.github/actions/base-setup@v1
+      - name: Install Conda environment with Micromamba
+        uses: mamba-org/setup-micromamba@v1
+        with:
+          micromamba-version: '1.5.1-0'
+          environment-file: environment.yml
+          cache-environment: true
 
       - name: Install jupyterlite-xeus-python
         run: |
-          # install JupyterLab to get jlpm
-          python -m pip install jupyterlab~=4.0
-
           jlpm
           jlpm run build
           python -m pip install -v .
