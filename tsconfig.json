@@ -9,17 +9,15 @@
     "module": "esnext",
     "moduleResolution": "node",
     "noEmitOnError": true,
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "noUnusedLocals": true,
     "preserveWatchOutput": true,
     "resolveJsonModule": true,
     "outDir": "lib",
     "rootDir": "src",
-    "skipLibCheck": true,
     "strict": true,
     "strictNullChecks": true,
-    "target": "es2019",
-    "types": []
+    "target": "ES2018"
   },
   "include": ["src/*"]
 }
