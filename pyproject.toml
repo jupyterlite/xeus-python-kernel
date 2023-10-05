@@ -30,6 +30,12 @@ dependencies = [
 ]
 dynamic = ["version", "description", "authors", "urls", "keywords"]
 
+[project.scripts]
+jupyterlite-xeus-python-build = "jupyterlite_xeus_python.build:start"
+
+[project.entry-points."jupyterlite.addon.v0"]
+jupyterlite-xeus-python = "jupyterlite_xeus_python.env_build_addon:XeusPythonEnv"
+
 [tool.hatch.version]
 source = "nodejs"
 
