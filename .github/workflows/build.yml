@@ -74,7 +74,7 @@ jobs:
           # Remove NodeJS, twice to take care of system and locally installed node versions.
           sudo rm -rf $(which node)
           sudo rm -rf $(which node)
-          pip install jupyterlite-xeus-python*.tar.gz
+          pip install jupyterlite_xeus_python*.tar.gz
           pip install "jupyterlab==4"
           jupyter labextension list 2>&1 | grep -ie "@jupyterlite/xeus-python-kernel.*OK"
 
@@ -108,7 +108,7 @@ jobs:
           python -c "from mamba.api import create"
 
       - name: Install
-        run: pip install jupyterlite-xeus-python*.tar.gz
+        run: pip install jupyterlite_xeus_python*.tar.gz
         working-directory: dist
 
       - name: Run tests
@@ -136,7 +136,7 @@ jobs:
           cache-environment: true
 
       - name: Install
-        run: pip install jupyterlite-xeus-python*.tar.gz
+        run: pip install jupyterlite_xeus_python*.tar.gz
         working-directory: dist
 
       - name: Run tests
@@ -164,7 +164,7 @@ jobs:
           cache-environment: true
 
       - name: Install
-        run: pip install jupyterlite-xeus-python*.tar.gz
+        run: pip install jupyterlite_xeus_python*.tar.gz
         working-directory: dist
 
       - name: Run tests
@@ -192,7 +192,7 @@ jobs:
           cache-environment: true
 
       - name: Install
-        run: pip install jupyterlite-xeus-python*.tar.gz
+        run: pip install jupyterlite_xeus_python*.tar.gz
         working-directory: dist
 
       - name: Run tests
