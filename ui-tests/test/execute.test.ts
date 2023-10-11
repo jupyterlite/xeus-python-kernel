@@ -6,7 +6,6 @@ import { test } from '@jupyterlab/galata';
 import { expect } from '@playwright/test';
 
 test.describe('Code execution', () => {
-
   test.beforeEach(async ({ page }) => {
     await page.goto('lab/index.html');
   });
