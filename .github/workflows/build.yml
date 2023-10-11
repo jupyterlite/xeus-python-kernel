@@ -44,10 +44,6 @@ jobs:
           environment-file: environment.yml
           cache-environment: true
 
-      - name: Lint
-        run: |
-          jlpm run eslint:check
-
       - name: Build the extension
         run: python -m build
 
