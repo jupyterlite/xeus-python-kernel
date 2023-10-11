@@ -11,7 +11,7 @@ test.describe('Code execution', () => {
   });
 
   test('Basic code execution', async ({ page }) => {
-    // try running cells
+    await page.notebook.createNew();
     await page.notebook.setCell(0, 'code', '2 + 2');
     await page.notebook.run();
     const output = await page.notebook.getCellTextOutput(0);
