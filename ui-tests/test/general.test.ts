@@ -16,6 +16,10 @@ test.describe('General', () => {
 
   test('Kernel is registered', async ({ page }) => {
     const imageName = 'launcher.png';
-    expect(await page.screenshot()).toMatchSnapshot(imageName);
+    const launcherElement = await page.$('.jp-Launcher-body');
+    if (!launcherElement) {
+      throw new Error('Launcher not found');
+    }
+    expect(await launcherElement.screenshot()).toMatchSnapshot(imageName);
   });
 });
