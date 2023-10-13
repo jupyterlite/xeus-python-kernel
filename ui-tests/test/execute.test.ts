@@ -20,6 +20,10 @@ test.describe('Code execution', () => {
       test.setTimeout(60000 * 3);
     }
     await page.notebook.createNew();
+    
+    // TODO: remove
+    // See https://github.com/jupyterlab/jupyterlab/issues/15252 for more information
+    await page.notebook.setCell(0, 'code', '2 + 2');
     await page.notebook.setCell(0, 'code', '2 + 2');
     await page.notebook.run();
     const output = await page.notebook.getCellTextOutput(0);
