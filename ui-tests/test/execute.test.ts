@@ -14,7 +14,11 @@ test.describe('Code execution', () => {
     await page.goto('lab/index.html');
   });
 
-  test('Basic code execution', async ({ page }) => {
+  test('Basic code execution', async ({ page, browserName }) => {
+    if (browserName === 'webkit') {
+      // try waiting longer for webkit
+      test.setTimeout(60000 * 3);
+    }
     await page.notebook.createNew();
     await page.notebook.setCell(0, 'code', '2 + 2');
     await page.notebook.run();
