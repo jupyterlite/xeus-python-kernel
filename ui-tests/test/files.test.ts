@@ -14,6 +14,9 @@ test.describe('File system', () => {
     await page.goto('lab/index.html');
   });
 
+  // this test can take a while due to the time take to type the inputs
+  test.setTimeout(60000 * 3);
+
   test('Create files from the notebook and open them in JupyterLab', async ({
     page
   }) => {
