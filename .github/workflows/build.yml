@@ -53,7 +53,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: jupyterlite-xeus-python-dist-${{ github.run_number }}
-          path: dist/jupyterlite-xeus-python*
+          path: dist
           if-no-files-found: error
 
   test_isolated:
