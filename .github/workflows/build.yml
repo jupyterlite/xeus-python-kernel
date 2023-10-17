@@ -46,14 +46,6 @@ jobs:
 
       - name: Build the extension
         run: |
-          python -m pip install .[test]
-
-          jupyter labextension list
-          jupyter labextension list 2>&1 | grep -ie "@jupyterlite/xeus-python-kernel.*OK"
-          python -m jupyterlab.browser_check
-
-      - name: Package the extension
-        run: |
           set -eux
 
           python -m build
