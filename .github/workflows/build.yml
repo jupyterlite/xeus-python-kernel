@@ -46,7 +46,6 @@ jobs:
 
       - name: Build the extension
         run: |
-          set -eux
           python -m pip install .[test]
 
           jupyter labextension list
@@ -57,7 +56,6 @@ jobs:
         run: |
           set -eux
 
-          pip install build
           python -m build
           pip uninstall -y "jupyterlite-xeus-python" jupyterlab
 
