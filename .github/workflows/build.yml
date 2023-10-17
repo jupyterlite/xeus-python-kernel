@@ -47,9 +47,7 @@ jobs:
       - name: Build the extension
         run: |
           set -eux
-
           python -m build
-          pip uninstall -y "jupyterlite-xeus-python" jupyterlab
 
       - name: Upload extension packages
         uses: actions/upload-artifact@v3
