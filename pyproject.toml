@@ -80,6 +80,8 @@ skip-if-exists = [
 [tool.hatch.build.hooks.jupyter-builder.build-kwargs]
 build_cmd = "build:prod"
 npm = ["jlpm"]
+source_dir = "src"
+build_dir = "jupyterlite_xeus_python/labextension"
 
 [tool.hatch.build.hooks.jupyter-builder.editable-build-kwargs]
 build_cmd = "install:extension"
@@ -96,6 +98,7 @@ before-build-npm = [
     "jlpm",
     "jlpm build:prod"
 ]
+before-build-python = ["jlpm clean:all"]
 
 [tool.check-wheel-contents]
 ignore = ["W002"]
