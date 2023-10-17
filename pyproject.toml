@@ -70,7 +70,7 @@ ensured-targets = [
     "jupyterlite_xeus_python/labextension/package.json",
 ]
 skip-if-exists = [
-    "jupyterlite_xeus_python/labextension/static/style.js"
+    "jupyterlite_xeus_python/labextension/static/style.js",
     "jupyterlite_xeus_python/labextension/static/empack_env_meta.json",
     "jupyterlite_xeus_python/labextension/static/xpython_wasm.js",
     "jupyterlite_xeus_python/labextension/static/xpython_wasm.wasm",
