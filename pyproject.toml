@@ -52,10 +52,6 @@ fields = ["description", "authors", "urls"]
 artifacts = ["jupyterlite_xeus_python/labextension"]
 exclude = [".github"]
 
-[tool.hatch.build.targets.wheel]
-artifacts = ["jupyterlite_xeus_python/labextension"]
-include = ["jupyterlite_xeus_python/"]
-
 [tool.hatch.build.targets.wheel.shared-data]
 "jupyterlite_xeus_python/labextension" = "share/jupyter/labextensions/@jupyterlite/xeus-python-kernel"
 "install.json" = "share/jupyter/labextensions/@jupyterlite/xeus-python-kernel/install.json"
