@@ -34,39 +34,39 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Install Conda environment with Micromamba
-      uses: mamba-org/setup-micromamba@v1
-      with:
-        micromamba-version: '1.5.1-0'
-        environment-file: environment.yml
-        cache-environment: true
+      - name: Install Conda environment with Micromamba
+        uses: mamba-org/setup-micromamba@v1
+        with:
+          micromamba-version: '1.5.1-0'
+          environment-file: environment.yml
+          cache-environment: true
 
-    - name: Build the extension
-      run: |
-        set -eux
-        python -m pip install .[test]
+      - name: Build the extension
+        run: |
+          set -eux
+          python -m pip install .[test]
 
-        jupyter labextension list
-        jupyter labextension list 2>&1 | grep -ie "@jupyterlite/xeus-python-kernel.*OK"
-        python -m jupyterlab.browser_check
+          jupyter labextension list
+          jupyter labextension list 2>&1 | grep -ie "@jupyterlite/xeus-python-kernel.*OK"
+          python -m jupyterlab.browser_check
 
-    - name: Package the extension
-      run: |
-        set -eux
+      - name: Package the extension
+        run: |
+          set -eux
 
-        pip install build
-        python -m build
-        pip uninstall -y "jupyterlite-xeus-python" jupyterlab
+          pip install build
+          python -m build
+          pip uninstall -y "jupyterlite-xeus-python" jupyterlab
 
-    - name: Upload extension packages
-      uses: actions/upload-artifact@v3
-      with:
-        name: jupyterlite-xeus-python-dist-${{ github.run_number }}
-        path: dist/jupyterlite-xeus-python*
-        if-no-files-found: error
+      - name: Upload extension packages
+        uses: actions/upload-artifact@v3
+        with:
+          name: jupyterlite-xeus-python-dist-${{ github.run_number }}
+          path: dist/jupyterlite-xeus-python*
+          if-no-files-found: error
 
   test_isolated:
     needs: build
