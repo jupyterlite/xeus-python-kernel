@@ -53,7 +53,7 @@ artifacts = ["jupyterlite_xeus_python/labextension"]
 exclude = [".github"]
 
 [tool.hatch.build.targets.wheel.shared-data]
-"jupyterlite_xeus_python/labextension/" = "share/jupyter/labextensions/@jupyterlite/xeus-python-kernel"
+"jupyterlite_xeus_python/labextension" = "share/jupyter/labextensions/@jupyterlite/xeus-python-kernel"
 "install.json" = "share/jupyter/labextensions/@jupyterlite/xeus-python-kernel/install.json"
 
 [tool.hatch.build.hooks.version]
