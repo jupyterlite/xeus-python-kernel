@@ -24,7 +24,6 @@ test.describe('Code execution', () => {
     expect(output![0]).toBe('4');
   });
 
-
   test('Import critical packages', async ({ page }) => {
     await page.notebook.createNew();
     await page.notebook.setCell(0, 'code', 'import scipy\nscipy.__version__');
