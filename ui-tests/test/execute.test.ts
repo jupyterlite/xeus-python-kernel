@@ -30,6 +30,6 @@ test.describe('Code execution', () => {
     await page.notebook.run();
     const output = await page.notebook.getCellTextOutput(0);
 
-    expect(output).toBeTruthy();
+    expect(output).not.toContain('ModuleNotFoundError');
   });
 });
