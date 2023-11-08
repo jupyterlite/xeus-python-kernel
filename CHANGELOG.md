@@ -2,6 +2,22 @@
 
 <!-- <START NEW CHANGELOG ENTRY> -->
 
+## 0.9.7
+
+([Full Changelog](https://github.com/jupyterlite/xeus-python-kernel/compare/v0.9.6...89f548a6b549aadc6bc56732552b0c15f6ecee11))
+
+### Merged PRs
+
+- Support both jupyterlite 0.1 and 0.2 [#188](https://github.com/jupyterlite/xeus-python-kernel/pull/188) ([@martinRenou](https://github.com/martinRenou))
+
+### Contributors to this release
+
+([GitHub contributors page for this release](https://github.com/jupyterlite/xeus-python-kernel/graphs/contributors?from=2023-09-27&to=2023-11-08&type=c))
+
+[@github-actions](https://github.com/search?q=repo%3Ajupyterlite%2Fxeus-python-kernel+involves%3Agithub-actions+updated%3A2023-09-27..2023-11-08&type=Issues) | [@jtpio](https://github.com/search?q=repo%3Ajupyterlite%2Fxeus-python-kernel+involves%3Ajtpio+updated%3A2023-09-27..2023-11-08&type=Issues) | [@martinRenou](https://github.com/search?q=repo%3Ajupyterlite%2Fxeus-python-kernel+involves%3AmartinRenou+updated%3A2023-09-27..2023-11-08&type=Issues)
+
+<!-- <END NEW CHANGELOG ENTRY> -->
+
 ## 0.9.6
 
 ([Full Changelog](https://github.com/jupyterlite/xeus-python-kernel/compare/v0.9.5...48c2518812d748377609a2d2da7b16b4ae417f9f))
@@ -15,8 +31,6 @@
 ([GitHub contributors page for this release](https://github.com/jupyterlite/xeus-python-kernel/graphs/contributors?from=2023-09-26&to=2023-09-27&type=c))
 
 [@martinRenou](https://github.com/search?q=repo%3Ajupyterlite%2Fxeus-python-kernel+involves%3AmartinRenou+updated%3A2023-09-26..2023-09-27&type=Issues)
-
-<!-- <END NEW CHANGELOG ENTRY> -->
 
 ## 0.9.5
 
