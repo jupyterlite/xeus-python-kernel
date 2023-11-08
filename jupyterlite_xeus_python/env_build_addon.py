@@ -22,10 +22,7 @@ from jupyterlite_core.constants import (
     UTF8,
     FEDERATED_EXTENSIONS,
 )
-from jupyterlite_core.addons.federated_extensions import (
-    FederatedExtensionAddon,
-    ENV_EXTENSIONS,
-)
+from jupyterlite_core.addons.federated_extensions import FederatedExtensionAddon
 
 from .build import XEUS_PYTHON_VERSION, build_and_pack_emscripten_env
 
@@ -73,8 +70,15 @@ class XeusPythonEnv(FederatedExtensionAddon):
 
     def post_build(self, manager):
         """yield a doit task to create the emscripten-32 env and grab anything we need from it"""
+        try:
+            # JupyterLite 0.1.x
+            from jupyterlite_core.addons.federated_extensions import ENV_EXTENSIONS as env_extensions
+        except ImportError:
+            # JupyterLite 0.2.x
+            env_extensions = self.labextensions_path
+
         # Install the jupyterlite-xeus-python ourselves
-        for pkg_json in self.env_extensions(ENV_EXTENSIONS):
+        for pkg_json in self.env_extensions(env_extensions):
             pkg_data = json.loads(pkg_json.read_text(**UTF8))
             if pkg_data.get("name") == JUPYTERLITE_XEUS_PYTHON:
                 yield from self.safe_copy_extension(pkg_json)
