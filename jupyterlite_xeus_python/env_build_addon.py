@@ -61,7 +61,7 @@ class XeusPythonEnv(FederatedExtensionAddon):
         """yield a doit task to create the emscripten-32 env and grab anything we need from it"""
         try:
             # JupyterLite 0.1.x
-            from jupyterlite_core.addons.federated_extensions import (ENV_EXTENSIONS)
+            from jupyterlite_core.addons.federated_extensions import ENV_EXTENSIONS
         except ImportError:
             # JupyterLite 0.2.x
             ENV_EXTENSIONS = self.labextensions_path
