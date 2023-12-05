@@ -62,12 +62,14 @@ class XeusPythonEnv(FederatedExtensionAddon):
         try:
             # JupyterLite 0.1.x
             from jupyterlite_core.addons.federated_extensions import ENV_EXTENSIONS
+
+            env_extensions = ENV_EXTENSIONS
         except ImportError:
             # JupyterLite 0.2.x
-            ENV_EXTENSIONS = self.labextensions_path
+            env_extensions = self.labextensions_path
 
         # Install the jupyterlite-xeus-python ourselves
-        for pkg_json in self.env_extensions(ENV_EXTENSIONS):
+        for pkg_json in self.env_extensions(env_extensions):
             pkg_data = json.loads(pkg_json.read_text(**UTF8))
             if pkg_data.get("name") == JUPYTERLITE_XEUS_PYTHON:
                 yield from self.safe_copy_extension(pkg_json)
