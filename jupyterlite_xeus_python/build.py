@@ -230,7 +230,7 @@ def build_and_pack_emscripten_env(  # noqa: C901, PLR0912, PLR0915
     channels = CHANNELS
     specs = [
         f"python={python_version}",
-        "xeus-lite",
+        "xeus-lite>=1.0.0,<1.0.3",
         "xeus-python" if not xeus_python_version else f"xeus-python={xeus_python_version}",
         *packages,
     ]
