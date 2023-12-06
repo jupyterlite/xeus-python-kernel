@@ -2,6 +2,28 @@
 
 <!-- <START NEW CHANGELOG ENTRY> -->
 
+## 0.9.8
+
+([Full Changelog](https://github.com/jupyterlite/xeus-python-kernel/compare/v0.9.7...abf2ccf8d41db4a4401711fa0862f529e5164dca))
+
+### Maintenance and upkeep improvements
+
+- Adopt `ruff`, `black`, fix various issues (Backport PR #169) [#192](https://github.com/jupyterlite/xeus-python-kernel/pull/192) ([@meeseeksmachine](https://github.com/meeseeksmachine))
+- Align repo with the extension template (Backport #168) [#191](https://github.com/jupyterlite/xeus-python-kernel/pull/191) ([@martinRenou](https://github.com/martinRenou))
+- Update to JupyterLab 4 and JupyterLite 0.2.0 (Backport #155 on 0.x) [#190](https://github.com/jupyterlite/xeus-python-kernel/pull/190) ([@martinRenou](https://github.com/martinRenou))
+
+### Other merged PRs
+
+- Pin xeus-lite [#195](https://github.com/jupyterlite/xeus-python-kernel/pull/195) ([@martinRenou](https://github.com/martinRenou))
+
+### Contributors to this release
+
+([GitHub contributors page for this release](https://github.com/jupyterlite/xeus-python-kernel/graphs/contributors?from=2023-11-08&to=2023-12-06&type=c))
+
+[@github-actions](https://github.com/search?q=repo%3Ajupyterlite%2Fxeus-python-kernel+involves%3Agithub-actions+updated%3A2023-11-08..2023-12-06&type=Issues) | [@martinRenou](https://github.com/search?q=repo%3Ajupyterlite%2Fxeus-python-kernel+involves%3AmartinRenou+updated%3A2023-11-08..2023-12-06&type=Issues) | [@meeseeksmachine](https://github.com/search?q=repo%3Ajupyterlite%2Fxeus-python-kernel+involves%3Ameeseeksmachine+updated%3A2023-11-08..2023-12-06&type=Issues)
+
+<!-- <END NEW CHANGELOG ENTRY> -->
+
 ## 0.9.7
 
 ([Full Changelog](https://github.com/jupyterlite/xeus-python-kernel/compare/v0.9.6...89f548a6b549aadc6bc56732552b0c15f6ecee11))
@@ -15,8 +37,6 @@
 ([GitHub contributors page for this release](https://github.com/jupyterlite/xeus-python-kernel/graphs/contributors?from=2023-09-27&to=2023-11-08&type=c))
 
 [@github-actions](https://github.com/search?q=repo%3Ajupyterlite%2Fxeus-python-kernel+involves%3Agithub-actions+updated%3A2023-09-27..2023-11-08&type=Issues) | [@jtpio](https://github.com/search?q=repo%3Ajupyterlite%2Fxeus-python-kernel+involves%3Ajtpio+updated%3A2023-09-27..2023-11-08&type=Issues) | [@martinRenou](https://github.com/search?q=repo%3Ajupyterlite%2Fxeus-python-kernel+involves%3AmartinRenou+updated%3A2023-09-27..2023-11-08&type=Issues)
-
-<!-- <END NEW CHANGELOG ENTRY> -->
 
 ## 0.9.6
 
