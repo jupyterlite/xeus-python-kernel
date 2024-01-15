@@ -31,14 +31,14 @@ Considering you have a simple setup where you install **jupyterlite-xeus-python*
 You will now need to install **jupyterlite-xeus** in your build environment instead of **jupyterlite-xeus-python**, and the diff for your **environment.yml** should look like the following (adding **xeus-python** explicitely in the runtime):
 
 ```diff
-name: my-jupyterlite-env
-channels:
-  - https://repo.mamba.pm/emscripten-forge
-  - conda-forge
-dependencies:
-++  - xeus-python
-  - numpy
-  - matplotlib
+ name: my-jupyterlite-env
+ channels:
+   - https://repo.mamba.pm/emscripten-forge
+   - conda-forge
+ dependencies:
++  - xeus-python
+   - numpy
+   - matplotlib
 ```
 
 See https://github.com/jupyterlite/xeus-python-demo for a deployment using **jupyterlite-xeus**.
