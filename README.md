@@ -1,5 +1,9 @@
 # jupyterlite-xeus-python
 
+> [!WARNING]
+> jupyterlite-xeus-python is DEPRECATED
+> See [the migration guide](https://xeus-python-kernel.readthedocs.io/en/latest/migration.html)
+
 [![ci-badge]][ci] [![docs-badge]][docs]
 
 [ci-badge]: https://github.com/jupyterlite/xeus-python-kernel/workflows/Build/badge.svg
