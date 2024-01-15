@@ -19,7 +19,7 @@ dependencies:
   - numpy
   - matplotlib
   - pip:
-    - ipywidgets
+      - ipywidgets
 ```
 
 # Migrating to **jupyterlite-xeus**
