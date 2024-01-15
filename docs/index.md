@@ -2,9 +2,9 @@
 
 The [xeus-python](https://github.com/jupyter-xeus/xeus-python) kernel compiled to WebAssembly and installable in JupyterLite!
 
-> [!WARNING]
-> jupyterlite-xeus-python is DEPRECATED
-> Please see {ref}`migration`
+> ⚠️
+> jupyterlite-xeus-python is DEPRECATED.
+> Please see {ref}`migration`.
 
 Features:
 
